@@ -2,7 +2,7 @@ from utils.id_generator import IDGenerator
 
 class Drug():
     def __init__(self, database_connector, name, side_effects, benefits):
-        self.drug_id = IDGenerator.generate_id(db_connector=database_connector, id_length=2, hasNumbers=False, hasLetters=True, table="Drug", id_column_name="drugID")
+        self.drug_id = IDGenerator.generate_id(db_connector=database_connector, id_length=7, hasNumbers=True, hasLetters=False, table="Drug", id_column_name="drugID")
         self.name = name
         self.side_effects = side_effects
         self.benefits = benefits
