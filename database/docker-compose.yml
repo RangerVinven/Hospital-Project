@@ -1,0 +1,12 @@
+services:
+  development_db:
+    image: hospital
+    build: .
+    ports:
+      - "3000:3306"
+
+  test_db:
+    image: hospital
+    build: .
+    ports:
+      - "4000:3306"
