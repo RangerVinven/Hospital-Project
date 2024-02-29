@@ -51,3 +51,9 @@ class Drug():
 
         database_connector.cursor.execute(query, tuple(variables))        
         database_connector.db.commit()
+
+    
+    @staticmethod
+    def delete_drug(database_connector, id):
+        database_connector.cursor.execute("DELETE FROM Drug WHERE drugID=%s", (id,))
+        database_connector.db.commit()
