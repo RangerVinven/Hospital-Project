@@ -17,6 +17,8 @@ def setup_database():
 def teardown():
     database_connector.close_connection()
 
+
+
 def test_create_drug():
     # Arrange
     drug_name = "Honey Bunny"
@@ -29,6 +31,8 @@ def test_create_drug():
 
     # Assert
     assert database_connector.cursor.fetchone() is not None, "The drug isn't saved to the database"
+
+
 
 def test_update_drug_new_name(monkeypatch: MonkeyPatch):
     # Arrange
@@ -46,6 +50,8 @@ def test_update_drug_new_name(monkeypatch: MonkeyPatch):
     database_connector.cursor.execute("SELECT * FROM Drug WHERE drugID=1000 AND name=%s;", (updated_value,))
     assert database_connector.cursor.fetchone() is not None, "Drug not updated"
 
+
+
 def test_update_drug_new_sideeffects(monkeypatch: MonkeyPatch):
     # Arrange
     database_connector.cursor.execute("INSERT INTO Drug(drugID, name, sideeffects, benefits) VALUES (1001, 'cool drug name', 'update me', 'no benefits');")
@@ -60,6 +66,8 @@ def test_update_drug_new_sideeffects(monkeypatch: MonkeyPatch):
     # Assert
     database_connector.cursor.execute("SELECT * FROM Drug WHERE drugID=1001 AND sideeffects=%s;", (updated_value,))
     assert database_connector.cursor.fetchone() is not None, "Drug not updated"
+
+
 
 def test_update_drug_new_benefits(monkeypatch: MonkeyPatch):
     # Arrange
@@ -76,3 +84,15 @@ def test_update_drug_new_benefits(monkeypatch: MonkeyPatch):
     database_connector.cursor.execute("SELECT * FROM Drug WHERE drugID=1002 AND benefits=%s;", (updated_value,))
     assert database_connector.cursor.fetchone() is not None, "Drug not updated"
 
+
+def test_delete_drug():
+    # Arrange
+    database_connector.cursor.execute("INSERT INTO Drug(drugID, name, sideeffects, benefits) VALUES (2000, 'Cool drug', 'no side effects', 'all the benefits');")    
+    database_connector.db.commit()
+
+    # Act
+    Drug.delete_drug(database_connector, 2000)
+
+    # Assert
+    database_connector.cursor.execute("SELECT * FROM Drug WHERE drugID=2000 AND name='Cool drug';")
+    assert database_connector.cursor.fetchone() is None, "Drug not deleted from the database"
