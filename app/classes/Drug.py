@@ -17,7 +17,7 @@ class Drug():
 
     # Returns a list of all the drugs
     @staticmethod    
-    def list_drugs(self, database_connector):
+    def list_drugs(database_connector):
         database_connector.cursor.execute("SELECT * FROM Drug;")
         return database_connector.fetchall()
     
