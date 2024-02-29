@@ -96,3 +96,16 @@ def test_delete_drug():
     # Assert
     database_connector.cursor.execute("SELECT * FROM Drug WHERE drugID=2000 AND name='Cool drug';")
     assert database_connector.cursor.fetchone() is None, "Drug not deleted from the database"
+
+def test_find_drug(monkeypatch: MonkeyPatch):
+    # Arrange
+    database_connector.cursor.execute("INSERT INTO Drug(drugID, name, sideeffects, benefits) VALUES (3000, 'Cool drug', 'no side effects', 'all the benefits');")    
+    database_connector.db.commit()
+
+    # Act
+    inputs = ["3000", "Cool drug", "no side effects", "all the benefits"]
+    monkeypatch.setattr("builtins.input", lambda _: inputs.pop(0))  # Replaces the inputs inside update function with the above inputs array
+    drugs_found = Drug.find_drug(database_connector)
+
+    # Assert
+    assert len(drugs_found) >= 1, "Couldn't search for a drug"
