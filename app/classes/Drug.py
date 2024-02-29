@@ -20,6 +20,40 @@ class Drug():
     def list_drugs(self, database_connector):
         database_connector.cursor.execute("SELECT * FROM Drug;")
         return database_connector.fetchall()
+    
+    @staticmethod
+    def find_drug(database_connector):
+        # Gets the items the user wishes to change
+        id = input("Please enter the ID of the drug you wish to update (leave blank if unknown): ") or ""
+        name = input("Please enter the new name (leave blank if unknown): ") or ""
+        side_effects = input("Please enter the new side effects (leave blank if unknown): ") or ""
+        benefits = input("Please enter the new benefits effects (leave blank if unknown): ") or ""
+
+        # The inital query
+        query = "SELECT * FROM Drug WHERE 1=1"
+        variables = []
+
+        # Adds the "to-be updated" variables to the query
+        if id:
+            query += " AND drugID=%s"
+            variables.append(id)
+
+        if name:
+            query += "AND name=%s"
+            variables.append(name)
+        
+        if side_effects:
+            query += "AND sideeffects=%s"
+            variables.append(side_effects)
+        
+        if benefits:
+            query += "AND benefits=%s"
+            variables.append(benefits)
+
+        query += ";"
+
+        database_connector.cursor.execute(query, tuple(variables))        
+        return database_connector.cursor.fetchall()
 
     @staticmethod
     def update_drug(database_connector):
@@ -52,7 +86,6 @@ class Drug():
         database_connector.cursor.execute(query, tuple(variables))        
         database_connector.db.commit()
 
-    
     @staticmethod
     def delete_drug(database_connector, id):
         database_connector.cursor.execute("DELETE FROM Drug WHERE drugID=%s", (id,))
