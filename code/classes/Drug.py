@@ -7,10 +7,10 @@ class Drug():
         self.side_effects = side_effects
         self.benefits = benefits
 
-        self.create_drug(database_connector)
+        self._create_drug(database_connector)
 
     # Saves the drug to the database
-    def create_drug(self, database_connector):
+    def _create_drug(self, database_connector):
         # Gets the ID
         id = IDGenerator.generate_id(db_connector=database_connector, id_length=2, hasNumbers=False, hasLetters=True, table="Drug", id_column_name="drugID")
 
