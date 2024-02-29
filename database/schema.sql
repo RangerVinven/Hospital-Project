@@ -1,10 +1,10 @@
--- Daniel McPherson (30186044)
+# Daniel McPherson (30186044)
 
--- Creates the database
+# Creates the database
 CREATE DATABASE Hospital;
 use Hospital;
 
--- Creates the table
+# Creates the table
 CREATE TABLE Insurance(InsuranceID varchar(10) primary key, company varchar(45), address varchar(50), phone varchar(14));
 CREATE TABLE Patient(patientID varchar(10) primary key, firstname varchar(20), surname varchar(30), postcode varchar(8), address varchar(50), phone varchar(12), email varchar(40), insuranceID varchar(10));
 CREATE TABLE Visit(patientID varchar(10), doctorID varchar(4), dateofvisit date, symptoms varchar(200), diagnosis varchar(50), PRIMARY KEY(patientID, doctorID, dateofvisit));
@@ -12,7 +12,7 @@ CREATE TABLE Doctor(doctorID varchar(4) primary key, firstname varchar(20), surn
 CREATE TABLE Prescription(prescriptionID varchar(10) primary key, dateprescribed date, dosage int, duration int, comment varchar(200), drugID varchar(7), doctorID varchar(4), patientID varchar(10));
 CREATE TABLE Drug(drugID varchar(7) primary key, name varchar(50), sideeffects varchar(200), benefits varchar(200));
 
--- Inserts the data
+# Inserts the data
 SET GLOBAL local_infile=1;
 
 /* LOAD DATA LOCAL INFILE 'CSV Files/Insurance.csv' INTO TABLE Insurance FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS; */
