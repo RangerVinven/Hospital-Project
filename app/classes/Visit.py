@@ -16,11 +16,11 @@ class Visit():
 
     @staticmethod
     def find_visit(database_connector):
-        patient_id = input("Please enter the patient's id (leave blank if unknown): ")
-        doctor_id = input("Please enter the doctor's id (leave blank if unknown): ")
-        date_of_visit = input("Please enter the date of visit in YYYY-MM-DD format (leave blank if unknown): ")
-        symptoms = input("Please enter the symptoms (leave blank if unknown): ")
-        diagnosis = input("Please enter the diagnosis (leave blank if unknown): ")
+        patient_id = input("Please enter the patient's id (or leave blank): ")
+        doctor_id = input("Please enter the doctor's id (or leave blank): ")
+        date_of_visit = input("Please enter the date of visit in YYYY-MM-DD format (or leave blank): ")
+        symptoms = input("Please enter the symptoms (or leave blank): ")
+        diagnosis = input("Please enter the diagnosis (or leave blank): ")
 
         query, variables = QueryBuilder.create_find_query("Visit", ("patientID", "doctorID", "dateofvisit", "symptoms", "diagnosis"), (patient_id, doctor_id, date_of_visit, symptoms, diagnosis))
 
