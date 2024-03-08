@@ -1,4 +1,4 @@
-from utils.id_generator import IDGenerator
+from ..utils.id_generator import IDGenerator
 
 class Insurance():
     def __init__(self, database_connector, company, address, phone):
