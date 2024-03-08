@@ -45,7 +45,7 @@ class Insurance():
         address = input("Enter the new company name (leave blank for no change): ") or ""
         phone = input("Enter the new company name (leave blank for no change): ") or ""
 
-        query, variables = QueryBuilder.create_update_query("Insurance", "insuranceID", insurance_id, ("company", "address", "phone"), (company, address, phone))
+        query, variables = QueryBuilder.create_update_query("Insurance", ["insuranceID"], [insurance_id], ("company", "address", "phone"), (company, address, phone))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))

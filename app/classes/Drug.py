@@ -45,7 +45,7 @@ class Drug():
         side_effects = input("Please enter the new side effects (leave blank for no change): ") or ""
         benefits = input("Please enter the new benefits effects (leave blank for no change): ") or ""
 
-        query, variables = QueryBuilder.create_update_query("Drug", "DrugID", id, ("name", "sideeffects", "benefits"), (name, side_effects, benefits))
+        query, variables = QueryBuilder.create_update_query("Drug", ["DrugID"], [id], ("name", "sideeffects", "benefits"), (name, side_effects, benefits))
 
         database_connector.cursor.execute(query, tuple(variables))        
         database_connector.db.commit()
