@@ -18,6 +18,13 @@ class QueryBuilder():
 
         return query, variables
 
+
+    # Positional Parameters:
+    # Table Name
+    # Table ID Column Name(s) (as an array), i.e - [id] or [patientID, doctorID] for composite keys
+    # Table ID Column Values(s) (as an array), i.e - ["123"] or ["111", "222"] for composite keys
+    # Column Names (as a tuple)
+    # Column Values (as a tuple)
     @staticmethod
     def create_update_query(table_name: str, table_id_names: tuple, table_id_values: tuple, column_names: tuple, column_values: tuple):
         query = "UPDATE {} SET {}=%s".format(table_name, table_id_names[0])
