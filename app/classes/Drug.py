@@ -1,4 +1,5 @@
 from ..utils.id_generator import IDGenerator
+from ..utils.query_builder import QueryBuilder
 
 class Drug():
     def __init__(self, database_connector, name, side_effects, benefits):
@@ -23,34 +24,15 @@ class Drug():
     
     @staticmethod
     def find_drug(database_connector):
+
         # Gets the items the user wishes to change
         id = input("Please enter the ID of the drug you wish to update (leave blank if unknown): ") or ""
         name = input("Please enter the new name (leave blank if unknown): ") or ""
         side_effects = input("Please enter the new side effects (leave blank if unknown): ") or ""
         benefits = input("Please enter the new benefits effects (leave blank if unknown): ") or ""
 
-        # The inital query
-        query = "SELECT * FROM Drug WHERE 1=1"
-        variables = []
-
-        # Adds the "to-be updated" variables to the query
-        if id:
-            query += " AND drugID=%s"
-            variables.append(id)
-
-        if name:
-            query += "AND name=%s"
-            variables.append(name)
-        
-        if side_effects:
-            query += "AND sideeffects=%s"
-            variables.append(side_effects)
-        
-        if benefits:
-            query += "AND benefits=%s"
-            variables.append(benefits)
-
-        query += ";"
+        # Gets the query to find the Drug(s)
+        query, variables = QueryBuilder.create_find_query("Drug", ("drugID", "name", "sideeffects", "benefits"), (id, name, side_effects, benefits))
 
         database_connector.cursor.execute(query, tuple(variables))        
         return database_connector.cursor.fetchall()
