@@ -1,0 +1,41 @@
+prescriptionID,dateprescribed,dosage,duration,comment,drugID,doctorID,patientID
+3502677913,2023-02-03,11,7,Myelofibrosis,14060,3802,FVEJKSZQ
+4359321449,2023-06-05,21,7,Other specified forms of chronic ischemic heart disease,19124,4516,W5A59Z49
+8514507559,2023-03-06,3,66,"Disorganized type schizophrenia, subchronic",19798,5512,01YB9G9E
+9550598101,2023-02-09,24,5,Malignant neoplasm of thymus,19798,7697,W5A59Z49
+6619433928,2023-08-02,2,75,Panuveitis,20819,1724,JNKQ9FHQ
+5227464707,2023-01-06,7,15,Other motor vehicle traffic accident involving collision on the highway injuring pedestrian,49226,7697,N31KQAKM
+9286518919,2023-03-05,7,59,"Hemarthrosis, upper arm",49226,1724,AW2DP3NZ
+5025852498,2023-01-10,18,16,"Other closed skull fracture with subarachnoid, subdural, and extradural hemorrhage, with moderate [1-24 hours] loss of consciousness",49226,5701,D42X803Q
+8076157641,2023-10-07,9,35,Nephrotic syndrome in diseases classified elsewhere,95274,9783,ZWTZK6TE
+9213587716,2023-04-01,16,68,Other specified diseases of pancreas,9652,3573,H77VBDW3
+187972885,2023-05-04,9,94,Bartter's syndrome,51049,9116,H77VBDW3
+3662171880,2023-05-06,1,74,Scanty or infrequent menstruation,51049,6689,PHXNAQJ0
+8418278153,2023-01-11,12,16,"Unspecified failed trial of labor, unspecified as to episode of care or not applicable",51049,7873,N31KQAKM
+6662431982,2023-07-07,16,42,"Liveborn, unspecified whether single, twin or multiple, born outside hospital and not hospitalized",55269,7842,AW2DP3NZ
+2586366387,2023-09-08,2,67,"Conductive hearing loss, bilateral",44532,7842,DX8G293R
+6255400034,2023-05-04,6,54,"Tuberculosis of other specified organs, tubercle bacilli not found by bacteriological examination, but tuberculosis confirmed histologically",69388,3802,N31KQAKM
+4708502419,2023-06-06,27,18,"Fetal malnutrition without mention of ""light-for-dates"", 2,000-2,499 grams",89448,6689,12B89XAT
+2224949421,2023-02-11,27,86,Primary exertional headache,23810,7781,R7SS268T
+1634654226,2023-08-02,24,34,Accidental poisoning by arsenic and its compounds and fumes,23810,4449,W5A59Z49
+9729515417,2023-01-04,28,83,"Poisoning by other antipsychotics, neuroleptics, and major tranquilizers",76121,3326,MMM4B1JV
+5244237101,2023-03-09,11,21,Pneumonia due to other specified bacteria,2793,7873,12B89XAT
+3353148299,2023-07-09,11,13,"Shoulder (girdle) dystocia, unspecified as to episode of care or not applicable",2793,9947,FZJXKBND
+5462093209,2023-03-06,4,53,"Acute miliary tuberculosis, tubercle bacilli not found by bacteriological or histological examination, but tuberculosis confirmed by other methods [inoculation of animals]",73065,3527,ZWTZK6TE
+866920552,2023-07-03,17,32,"Primary tuberculous infection, unspecified, tubercle bacilli not found by bacteriological or histological examination, but tuberculosis confirmed by other methods [inoculation of animals]",2261,3802,12B89XAT
+3192597224,2023-08-11,8,74,"Deep necrosis of underlying tissues [deep third degree] with loss of a body part, of ear [any part]",43091,5701,MMM4B1JV
+3017239403,2023-07-01,17,74,Prickly heat,43091,4449,WMPX90N2
+639298672,2023-04-03,11,89,"Cortex (cerebral) laceration with open intracranial wound, with moderate [1-24 hours] loss of consciousness",2261,7697,FVEJKSZQ
+1721487271,2023-03-09,22,42,Tick-borne fever,19111,3326,AW2DP3NZ
+9629846527,2023-06-04,24,22,"Circumpapillary dystrophy of choroid, total",60094,7763,H77VBDW3
+8687320965,2023-10-06,9,65,Balanced autosomal translocation in normal individual,66834,5701,6TFR6XE6
+6900552633,2023-05-04,8,16,"Low birth weight status, 2000-2500 grams",66834,5512,7X8D058W
+5711059645,2023-01-02,7,1,"Open fractures involving skull or face with other bones, with cerebral laceration and contusion, with no loss of consciousness",34154,3527,ZWTZK6TE
+1383892245,2023-04-08,16,98,Animal-drawn vehicle accident injuring other specified person,34154,9947,FZJXKBND
+9578308388,2023-05-05,22,20,Other syndromes affecting cervical region,83806,4438,9GM3J9FK
+9118023975,2023-10-06,17,18,Supernumerary teeth,99089,4516,Q70FPH47
+8021044578,2023-09-03,18,4,"Other injury to small intestine, without mention of open wound into cavity",99089,5512,01YB9G9E
+6429870731,2023-06-08,18,95,Open fracture of hamate [unciform] bone of wrist,99089,9783,GRRVQAB6
+8557855583,2023-06-03,15,4,Stenosis of lacrimal sac,69790,3527,6TFR6XE6
+512779201,2023-09-09,16,57,Personal history of malignant neoplasm of tongue,69790,5701,ZWTZK6TE
+3020794749,2023-09-06,8,69,"Leukocytosis, unspecified",69945,5701,CNWCCF76

@@ -1,0 +1,51 @@
+patientID,doctorID,dateofvisit,symptoms,diagnosis
+PHXNAQJ0,9947,2023-05-06,Family history of other specified malignant neoplasm,168
+621HD7PN,7763,2023-04-25,Family history of other neurological diseases,172
+621HD7PN,9783,2023-07-07,Insertion of implantable subdermal contraceptive,255
+MMM4B1JV,9055,2023-01-21,Russian spring-summer [taiga] encephalitis,630
+MMM4B1JV,3527,2023-09-30,History of physical abuse,1541
+W5A59Z49,7842,2023-08-04,Malignant neoplasm of heart,1641
+621HD7PN,5512,2023-01-05,Malignant neoplasm of brain stem,1917
+R2SFDEX3,9116,2023-02-25,Neoplasm of uncertain behavior of other and unspecified digestive organs,2355
+H77VBDW3,1724,2023-05-08,Unspecified psychophysiological malfunction,3069
+FZJXKBND,7842,2023-02-06,"Hemorrhage, unspecified",4590
+WMPX90N2,9116,2023-09-01,Anal fistula,5651
+WMPX90N2,9116,2023-10-25,Acute parametritis and pelvic cellulitis,6143
+TKZRTRJ5,4516,2023-05-13,Sicca syndrome,7102
+7X8D058W,9783,2023-03-25,Abnormal bowel sounds,7875
+12B89XAT,9055,2023-07-15,Nonspecific abnormal findings in amniotic fluid,7923
+FVEJKSZQ,5701,2023-02-12,"Fracture of lateral malleolus, closed",8242
+PHXNAQJ0,9116,2023-08-08,Sprain of lumbar,8472
+NKA6X97F,5512,2023-02-20,Accidental poisoning by chloral hydrate group,8520
+12B89XAT,9055,2023-09-13,Accidental poisoning by primarily systemic agents,8581
+PHXNAQJ0,7781,2023-02-19,"Traumatic amputation of arm and hand (complete) (partial), bilateral [any level], complicated",8877
+D42X803Q,7842,2023-02-22,"Crushing injury of multiple sites, not elsewhere classified",9290
+JNKQ9FHQ,7842,2023-04-04,Acid chemical burn of cornea and conjunctival sac,9403
+MW3MMZJ7,3802,2023-02-21,"Other venereal diseases due to chlamydia trachomatis, pharynx",9951
+J975MXD9,9116,2023-04-13,"Other lymphoid leukemia, without mention of having achieved remission",20480
+H77VBDW3,9947,2023-04-24,Other frontotemporal dementia,33119
+NKA6X97F,7842,2023-09-17,"Foreign body, magnetic, in lens",36053
+R7SS268T,7781,2023-11-09,Fusion with defective stereopsis,36833
+R7SS268T,3326,2023-11-03,Better eye: profound vision impairment; lesser eye: not further specified,36905
+01YB9G9E,9116,2023-12-05,Limited duction associated with other conditions,37863
+S8QNNAT9,9947,2023-01-05,Visual deprivation nystagmus,37953
+AW2DP3NZ,3527,2023-08-26,Other noninfectious disorders of pinna,38039
+N31KQAKM,3802,2023-07-03,Other specified disorders of circulatory system,45989
+JNKQ9FHQ,9947,2023-01-06,Other Staphylococcus pneumonia,48249
+JNKQ9FHQ,7781,2023-05-19,Exostosis of jaw,52681
+JNKQ9FHQ,7781,2023-09-13,"Legally induced abortion, complicated by embolism, incomplete",63561
+R7SS268T,7763,2023-10-21,"Bariatric surgery status complicating pregnancy, childbirth, or the puerperium, delivered, with or without mention of antepartum condition",64921
+MMM4B1JV,4516,2023-10-17,"Epilepsy complicating pregnancy, childbirth, or the puerperium, antepartum condition or complication",64943
+GRRVQAB6,7781,2023-01-17,"Unspecified umbilical cord complication complicating labor and delivery, delivered, with or without mention of antepartum condition",66391
+DX8G293R,3802,2023-10-02,"Unspecified polyarthropathy or polyarthritis, pelvic region and thigh",71655
+S8QNNAT9,3802,2023-09-25,Boutonniere deformity,73621
+Q70FPH47,7763,2023-04-10,Unspecified anomaly of fallopian tubes and broad ligaments,75210
+AW2DP3NZ,4516,2023-10-21,"Talipes, unspecified",75470
+01YB9G9E,7842,2023-07-12,"Open fracture of base of skull with cerebral laceration and contusion, with prolonged [more than 24 hours] loss of consciousness, without return to pre-existing conscious level",80165
+FVEJKSZQ,5701,2023-07-01,"Closed fractures involving skull or face with other bones, with other and unspecified intracranial hemorrhage, with loss of consciousness of unspecified duration",80436
+GRRVQAB6,5701,2023-03-21,Open fracture of ilium,80851
+01YB9G9E,4516,2023-09-15,"Open fracture of upper end of forearm, unspecified",81310
+621HD7PN,7842,2023-02-19,Other injury to spleen with open wound into cavity,86519
+H77VBDW3,5701,2023-06-06,"Full-thickness skin loss [third degree, not otherwise specified] of neck",94138
+R2SFDEX3,5701,2023-03-09,"Burn [any degree] involving 90 percent or more of body surface with third degree burn, 90% or more of body surface",94899
+FVEJKSZQ,1724,2023-05-02,Complications of transplanted bone marrow,99685
