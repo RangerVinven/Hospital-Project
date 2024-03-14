@@ -1,5 +1,6 @@
-from ..utils.id_generator import IDGenerator
-from ..utils.query_builder import QueryBuilder
+from utils.id_generator import IDGenerator
+from utils.query_builder import QueryBuilder
+from utils.record_manager import RecordManager
 
 class Insurance():
     def __init__(self, database_connector, company, address, phone):
@@ -19,22 +20,22 @@ class Insurance():
     @staticmethod
     def list_insurance(database_connector):
         database_connector.cursor.execute("SELECT * FROM Insurance;")
-        return database_connector.cursor.fetchall()
+        RecordManager.print_records(database_connector.cursor.fetchall())
 
     # Returns a specific insurance company details
     @staticmethod
     def find_insurance(database_connector):
         # Gets the items the user wishes to change
-        id = input("Please enter the ID of the insurance you wish to update (leave blank if unknown): ") or ""
-        company = input("Please enter the new company name (leave blank if unknown): ") or ""
-        address = input("Please enter the new address (leave blank if unknown): ") or ""
-        phone = input("Please enter the new phone number (leave blank if unknown): ") or ""
+        id = input("Please enter the ID of the insurance you wish to search for (leave blank if unknown): ") or ""
+        company = input("Please enter the company name you wish to search for (leave blank if unknown): ") or ""
+        address = input("Please enter the address you wish to search for (leave blank if unknown): ") or ""
+        phone = input("Please enter the phone number you wish to search for (leave blank if unknown): ") or ""
 
         query, variables = QueryBuilder.create_find_query("Insurance", ("insuranceID", "company", "address", "phone"), (id, company, address, phone))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))        
-        return database_connector.cursor.fetchall()
+        RecordManager.print_records(database_connector.cursor.fetchall())
     
     @staticmethod
     def update_insurance(database_connector):
@@ -49,9 +50,14 @@ class Insurance():
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))
+
+        RecordManager.is_row_changed(database_connector, "Insurance updated", "No insurance found, nothing was updated")
         database_connector.db.commit()
    
     # Deletes a specific insurance company
-    def delete_insurance(database_connector, insurance_id):
+    def delete_insurance(database_connector):
+        insurance_id = input("Please enter the id of the insurance you wish to delete: ")
         database_connector.cursor.execute("DELETE FROM Insurance WHERE insuranceID=%s", (insurance_id,))
+        
+        RecordManager.is_row_changed(database_connector, "Insurance deleted", "No insurance found, nothing was deleted")
         database_connector.db.commit()

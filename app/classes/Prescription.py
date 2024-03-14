@@ -1,5 +1,6 @@
-from ..utils.id_generator import IDGenerator
-from ..utils.query_builder import QueryBuilder
+from utils.id_generator import IDGenerator
+from utils.query_builder import QueryBuilder
+from utils.record_manager import RecordManager
 
 class Prescription():
     def __init__(self, database_connector, date_of_prescription, dosage, duration, comment, drug_id, doctor_id, patient_id):
@@ -22,7 +23,7 @@ class Prescription():
     @staticmethod
     def list_prescriptions(database_connector):
         database_connector.cursor.execute("SELECT * FROM Prescription;")
-        return database_connector.cursor.fetchall()
+        RecordManager.print_records(database_connector.cursor.fetchall())
 
     @staticmethod
     def find_prescription(database_connector):
@@ -38,7 +39,7 @@ class Prescription():
         query, variables = QueryBuilder.create_find_query("Prescription", ("dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
 
         database_connector.cursor.execute(query, variables)
-        return database_connector.cursor.fetchall()
+        RecordManager.print_records(database_connector.cursor.fetchall())
 
     # Updates the prescription
     @staticmethod
@@ -55,10 +56,18 @@ class Prescription():
         query, variables = QueryBuilder.create_update_query("Prescription", ["prescriptionID"], [prescription_id], ("dateofprescription", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
         
         database_connector.cursor.execute(query, tuple(variables))
+        RecordManager.is_row_changed(database_connector, "Prescription updated", "Prescription not found, no prescription updated")
+
         database_connector.db.commit()
 
     @staticmethod
-    def delete_prescription(database_connector, patient_id, doctor_id, date_of_prescription):
+    def delete_prescription(database_connector):
+        patient_id = input("Enter the patient's ID: ")
+        doctor_id = input("Enter the doctor's ID: ")
+        date_of_prescription = input("Enter the Date of prescription (YYYY-MM-DD): ")
+
         database_connector.cursor.execute("DELETE FROM Prescription WHERE (patientID, doctorID, dateprescribed) = (%s, %s, %s);", (patient_id, doctor_id, date_of_prescription))
+        RecordManager.is_row_changed(database_connector, "Prescription deleted", "Prescription not found, no prescription deleted")
+
         database_connector.db.commit()
 

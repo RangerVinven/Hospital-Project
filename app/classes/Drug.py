@@ -1,6 +1,6 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
-from utils.data_printer import print_data
+from utils.record_manager import RecordManager
 
 class Drug():
     def __init__(self, database_connector, name, side_effects, benefits):
@@ -23,22 +23,22 @@ class Drug():
         database_connector.cursor.execute("SELECT * FROM Drug;")
         drugs = database_connector.cursor.fetchall()
 
-        print_data(drugs)
+        RecordManager.print_records(drugs)
     
     @staticmethod
     def find_drug(database_connector):
 
         # Gets the items the user wishes to change
-        id = input("Please enter the ID of the drug you wish to update (leave blank if unknown): ") or ""
-        name = input("Please enter the new name (leave blank if unknown): ") or ""
-        side_effects = input("Please enter the new side effects (leave blank if unknown): ") or ""
-        benefits = input("Please enter the new benefits effects (leave blank if unknown): ") or ""
+        id = input("Please enter the ID of the drug you wish to search for (leave blank if unknown): ") or ""
+        name = input("Please enter the name of drug you wish to search for (leave blank if unknown): ") or ""
+        side_effects = input("Please enter the side effects of drug you wish to search for (leave blank if unknown): ") or ""
+        benefits = input("Please enter the benefits effects of drug you wish to search for (leave blank if unknown): ") or ""
 
         # Gets the query to find the Drug(s)
         query, variables = QueryBuilder.create_find_query("Drug", ("drugID", "name", "sideeffects", "benefits"), (id, name, side_effects, benefits))
 
         database_connector.cursor.execute(query, tuple(variables))        
-        print_data(database_connector.cursor.fetchall())
+        RecordManager.print_records(database_connector.cursor.fetchall())
 
     @staticmethod
     def update_drug(database_connector):
@@ -50,11 +50,15 @@ class Drug():
 
         query, variables = QueryBuilder.create_update_query("Drug", ["DrugID"], [id], ("name", "sideeffects", "benefits"), (name, side_effects, benefits))
 
-        database_connector.cursor.execute(query, tuple(variables))        
+        database_connector.cursor.execute(query, tuple(variables))
+        RecordManager.is_row_changed(database_connector, "Drug updated", "Drug not found, no drugs changed")
+
         database_connector.db.commit()
 
     @staticmethod
     def delete_drug(database_connector):
         id = input("Please enter the ID of the drug you wish to delete: ")
         database_connector.cursor.execute("DELETE FROM Drug WHERE drugID=%s", (id,))
+
+        RecordManager.is_row_changed(database_connector, "Drug deleted", "Drug not found, no drugs deleted")
         database_connector.db.commit()
