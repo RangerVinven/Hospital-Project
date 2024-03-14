@@ -38,10 +38,14 @@ class Visit():
         patient_id = input("Please enter the patient's id (needed to identify the record): ")  # To find the specific record
         doctor_id = input("Please enter the doctor's id  (needed to identify the record): ")  # To find the specific record
         date_of_visit = input("Please enter the date of visit in YYYY-MM-DD format (needed to identify the record): ")  # To find the specific record
-        symptoms = input("Please enter the symptoms (or leave blank for no change): ")  # To update the record
-        diagnosis = input("Please enter the diagnosis (or leave blank for no change): ")  # To update the record
 
-        query, variables = QueryBuilder.create_update_query("Visit", ["patientID", "doctorID", "dateofvisit"], [patient_id, doctor_id, date_of_visit], ("symptoms", "diagnosis"), (symptoms, diagnosis))
+        new_patient_id = input("Please enter the new patient's id (or leave blank for no change): ")  # To find the specific record
+        new_doctor_id = input("Please enter the new doctor's id (or leave blank for no change): ")  # To find the specific record
+        new_date_of_visit = input("Please enter the new date of visit in YYYY-MM-DD format (or leave blank for no change): ")  # To find the specific record
+        symptoms = input("Please enter the new symptoms (or leave blank for no change): ")  # To update the record
+        diagnosis = input("Please enter the new diagnosis (or leave blank for no change): ")  # To update the record
+
+        query, variables = QueryBuilder.create_update_query("Visit", ["patientID", "doctorID", "dateofvisit"], [patient_id, doctor_id, date_of_visit], ("patientID", "doctorID", "dateofvisit", "symptoms", "diagnosis"), (new_patient_id, new_doctor_id, new_date_of_visit, symptoms, diagnosis))
         database_connector.cursor.execute(query, tuple(variables))
 
         RecordManager.is_row_changed(database_connector, "Visit updated", "Visit not found, no visit updated")
