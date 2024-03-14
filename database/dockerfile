@@ -3,7 +3,7 @@ FROM mysql:8.3.0
 # Will change after development
 ENV MYSQL_ROOT_PASSWORD=root
 
-COPY ./CSVFiles /CSVFiles
+COPY ./CSVFiles /var/lib/mysql-files/CSVFiles
 
 COPY ./schema.sql /docker-entrypoint-initdb.d/
 
