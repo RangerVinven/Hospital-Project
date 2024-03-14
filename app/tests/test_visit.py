@@ -29,6 +29,7 @@ def test_create_visit():
     # Assert
     assert database_connector.cursor.fetchone() is not None, "The visit isn't saved to the database"
 
+
 def test_find_visit(monkeypatch: MonkeyPatch):
     # Arrange
     patient_id = "111"
@@ -84,6 +85,7 @@ def test_find_visit(monkeypatch: MonkeyPatch):
 
     # Assert
     assert len(visit_found) >= 1, "Couldn't search for a visit"
+
 
 def test_update_visit(monkeypatch: MonkeyPatch):
     # Arrange (uses the same record from test_create_visit)
