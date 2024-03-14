@@ -1,5 +1,5 @@
-from classes.Drug import Drug
-from utils.database_connector import database_connector
+from menu.drug_menu import show_drug_menu
+from menu.insurance_menu import show_insurance_menu
 
 def show_menu():
     main_menu = '''    
@@ -15,6 +15,7 @@ def show_menu():
     
     # Gets the selected option
     selected_option = input("Enter which category you'd like to interact with: ")
+
     while selected_option not in ["1", "2", "3", "4", "5", "6", "99"]:
         print("Invalid option")
         selected_option = input("Enter which category you'd like to interact with: ")
@@ -23,21 +24,8 @@ def show_menu():
     if selected_option == "3":
         show_drug_menu()
 
-def show_drug_menu():
-    menu = '''
-1. List drugs
-2. Search for a drug
-3. Edit a drug
-4. Delete a drug
-5. Back
-'''
-
-    print(menu)
-    selected_option = input("Enter your option: ")
-
-    if selected_option == "1":
-        Drug.list_drugs(database_connector)
-
+    elif selected_option == "6":
+        show_insurance_menu()
 
 
 if __name__ == "__main__":
