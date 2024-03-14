@@ -2,6 +2,12 @@ from tabulate import tabulate
 
 # Prints the data, takes an array of dictionaries as a parameter
 def print_data(dataToPrint):
+
+    if len(dataToPrint) == 0:
+        print("\n")
+        print("No results.\n")
+        return
+    
     headers = dataToPrint[0].keys()
     rows = []
 
@@ -15,4 +21,6 @@ def print_data(dataToPrint):
 
         rows.append(data_rows)
 
+    print("\n")
     print(tabulate(rows, headers=headers))
+    print("\n")
