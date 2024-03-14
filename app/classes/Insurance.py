@@ -26,10 +26,10 @@ class Insurance():
     @staticmethod
     def find_insurance(database_connector):
         # Gets the items the user wishes to change
-        id = input("Please enter the ID of the insurance you wish to search for (leave blank if unknown): ") or ""
-        company = input("Please enter the company name you wish to search for (leave blank if unknown): ") or ""
-        address = input("Please enter the address you wish to search for (leave blank if unknown): ") or ""
-        phone = input("Please enter the phone number you wish to search for (leave blank if unknown): ") or ""
+        id = input("Please enter the ID of the insurance you wish to search for (leave blank if unknown): ")
+        company = input("Please enter the company name you wish to search for (leave blank if unknown): ")
+        address = input("Please enter the address you wish to search for (leave blank if unknown): ")
+        phone = input("Please enter the phone number you wish to search for (leave blank if unknown): ")
 
         query, variables = QueryBuilder.create_find_query("Insurance", ("insuranceID", "company", "address", "phone"), (id, company, address, phone))
 
@@ -42,9 +42,9 @@ class Insurance():
 
         # Gets the new item details
         insurance_id = input("Enter the ID of the insurance company you want to update: ")
-        company = input("Enter the new company name (leave blank for no change): ") or ""
-        address = input("Enter the new company name (leave blank for no change): ") or ""
-        phone = input("Enter the new company name (leave blank for no change): ") or ""
+        company = input("Enter the new company name (leave blank for no change): ")
+        address = input("Enter the new company address (leave blank for no change): ")
+        phone = input("Enter the new company phone (leave blank for no change): ")
 
         query, variables = QueryBuilder.create_update_query("Insurance", ["insuranceID"], [insurance_id], ("company", "address", "phone"), (company, address, phone))
 
