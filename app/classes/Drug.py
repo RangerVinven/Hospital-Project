@@ -1,5 +1,6 @@
-from ..utils.id_generator import IDGenerator
-from ..utils.query_builder import QueryBuilder
+from utils.id_generator import IDGenerator
+from utils.query_builder import QueryBuilder
+from utils.data_printer import print_data
 
 class Drug():
     def __init__(self, database_connector, name, side_effects, benefits):
@@ -20,7 +21,9 @@ class Drug():
     @staticmethod    
     def list_drugs(database_connector):
         database_connector.cursor.execute("SELECT * FROM Drug;")
-        return database_connector.fetchall()
+        drugs = database_connector.cursor.fetchall()
+
+        print_data(drugs)
     
     @staticmethod
     def find_drug(database_connector):
@@ -35,7 +38,7 @@ class Drug():
         query, variables = QueryBuilder.create_find_query("Drug", ("drugID", "name", "sideeffects", "benefits"), (id, name, side_effects, benefits))
 
         database_connector.cursor.execute(query, tuple(variables))        
-        return database_connector.cursor.fetchall()
+        print_data(database_connector.cursor.fetchall())
 
     @staticmethod
     def update_drug(database_connector):
@@ -51,6 +54,7 @@ class Drug():
         database_connector.db.commit()
 
     @staticmethod
-    def delete_drug(database_connector, id):
+    def delete_drug(database_connector):
+        id = input("Please enter the ID of the drug you wish to delete: ")
         database_connector.cursor.execute("DELETE FROM Drug WHERE drugID=%s", (id,))
         database_connector.db.commit()
