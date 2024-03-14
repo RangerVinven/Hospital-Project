@@ -28,6 +28,7 @@ class Prescription():
     @staticmethod
     def find_prescription(database_connector):
         # Gets the search parameters
+        prescription_id = input("Please enter the ID of the prescription you wish to update: ")
         date_of_prescription = input("Please enter the date of prescription in YYYY-MM-DD format (or leave blank): ")
         dosage = input("Please enter the dosage (or leave blank): ")
         duration = input("Please enter the duration (or leave blank): ")
@@ -36,7 +37,7 @@ class Prescription():
         patient_id = input("Please enter the patient's id (or leave blank): ")
         doctor_id = input("Please enter the doctor's id (or leave blank): ")
 
-        query, variables = QueryBuilder.create_find_query("Prescription", ("dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
+        query, variables = QueryBuilder.create_find_query("Prescription", ("prescriptionID", "dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (prescription_id, date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
 
         database_connector.cursor.execute(query, variables)
         RecordManager.print_records(database_connector.cursor.fetchall())
@@ -45,15 +46,15 @@ class Prescription():
     @staticmethod
     def update_prescription(database_connector):
         prescription_id = input("Please enter the ID of the prescription you wish to update: ")
-        date_of_prescription = input("Please enter the date of prescription in YYYY-MM-DD format (needed to identify the record): ")  # To find the specific record
+        date_of_prescription = input("Please enter the date of prescription in YYYY-MM-DD format: ")
         dosage = input("Please enter the dosage (or leave blank for no change): ")
         duration = input("Please enter the duration (or leave blank for no change): ")
         comment = input("Please enter the comment (or leave blank for no change): ")
         drug_id = input("Please enter the drug id (or leave blank for no change): ")
-        patient_id = input("Please enter the patient's id (needed to identify the record): ")
-        doctor_id = input("Please enter the doctor's id  (needed to identify the record): ")
+        patient_id = input("Please enter the patient's id: ")
+        doctor_id = input("Please enter the doctor's id : ")
 
-        query, variables = QueryBuilder.create_update_query("Prescription", ["prescriptionID"], [prescription_id], ("dateofprescription", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
+        query, variables = QueryBuilder.create_update_query("Prescription", ["prescriptionID"], [prescription_id], ("dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
         
         database_connector.cursor.execute(query, tuple(variables))
         RecordManager.is_row_changed(database_connector, "Prescription updated", "Prescription not found, no prescription updated")
@@ -62,11 +63,9 @@ class Prescription():
 
     @staticmethod
     def delete_prescription(database_connector):
-        patient_id = input("Enter the patient's ID: ")
-        doctor_id = input("Enter the doctor's ID: ")
-        date_of_prescription = input("Enter the Date of prescription (YYYY-MM-DD): ")
+        prescription_id = input("Please enter the ID of the prescription you wish to delete: ")
 
-        database_connector.cursor.execute("DELETE FROM Prescription WHERE (patientID, doctorID, dateprescribed) = (%s, %s, %s);", (patient_id, doctor_id, date_of_prescription))
+        database_connector.cursor.execute("DELETE FROM Prescription WHERE prescriptionID=%s;", (prescription_id,))
         RecordManager.is_row_changed(database_connector, "Prescription deleted", "Prescription not found, no prescription deleted")
 
         database_connector.db.commit()
