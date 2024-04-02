@@ -37,8 +37,10 @@ class Patient():
         phone = input("Please enter the phone you wish to search for (leave blank if unknown): ")
         email = input("Please enter the email you wish to search for (leave blank if unknown): ")
         insurance_id = input("Please enter the insurance id you wish to search for (leave blank if unknown): ")
-
-        query, variables = QueryBuilder.create_find_query("Patient", ("patientID", "firstname", "surname", "postcode", "address", "phone", "email", "insuranceID"), (id, firstname, surname, postcode, address, phone, email, insurance_id))
+        insurance_type = input("Please enter the insurance type you wish to search for (leave blank if unknown): ")
+        insurance_duration = input("Please enter the insurance duration you wish to search for (leave blank if unknown): ")
+        
+        query, variables = QueryBuilder.create_find_query("Patient", ("patientID", "firstname", "surname", "postcode", "address", "phone", "email", "insuranceID", "insuranceType", "insuranceDuration"), (id, firstname, surname, postcode, address, phone, email, insurance_id, insurance_type, insurance_duration))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))        
@@ -56,8 +58,10 @@ class Patient():
         phone = input("Enter the new phone (leave blank for no change): ")
         email = input("Enter the new email (leave blank for no change): ")
         insurance_id = input("Enter the new insurance id (leave blank for no change): ")
+        insurance_type = input("Enter the new insurance type (leave blank for no change): ")
+        insurance_duration = input("Enter the new insurance duration (leave blank for no change): ")
 
-        query, variables = QueryBuilder.create_update_query("Patient", ("patientID",), (patient_id,), ("firstname", "surname", "postcode", "address", "phone", "email", "insurance_id"), (firstname, surname, postcode, address, phone, email, insurance_id))
+        query, variables = QueryBuilder.create_update_query("Patient", ("patientID",), (patient_id,), ("firstname", "surname", "postcode", "address", "phone", "email", "insuranceID", "insuranceType", "insuranceDuration"), (firstname, surname, postcode, address, phone, email, insurance_id, insurance_type, insurance_duration))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))
@@ -75,9 +79,14 @@ class Patient():
 
 
 class InsuredPatient(Patient):
-    def __init__(self, firstname, surname, postcode, address, phone, email, insurance_type, insurance_company_name, duration_of_insurance):
+    def __init__(self, firstname, surname, postcode, address, phone, email, insurance_type, insurance_duration):
         super().__init__(firstname, surname, postcode, address, phone, email)
         
         self.insurance_type = insurance_type
-        self.insurance_company_name = insurance_company_name
-        self.duration_of_insurance = duration_of_insurance 
+        self.insurance_duration = insurance_duration
+
+        self._create_patient()
+
+    def _create_patient(self, database_connector):
+        database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID, insuranceType, insuranceDuration) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.address, self.email, self.insurance_id, self.insurance_type, self.insurance_duration))
+        database_connector.db.commit()
