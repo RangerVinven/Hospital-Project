@@ -10,12 +10,10 @@ class Doctor():
         self.address = input("What's the doctor's address? ")
         self.email = input("What's the doctor's email? ")
 
-        if self.__class__ == Doctor:
-            print("Is an instance")
-            self._create_doctor(database_connector)
-
-    def _create_doctor(self, database_connector):
+    def create_doctor(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Doctor(doctorID, firstname, surname, address, email) VALUES (%s, %s, %s, %s, %s);", (self.doctor_id, self.firstname, self.surname, self.address, self.email))
+        
+        RecordManager.is_row_changed(database_connector, "Doctor created", "Something went wrong, nothing was created")
         database_connector.db.commit()
 
     # Returns all the doctor companies
@@ -77,8 +75,8 @@ class Specialist(Doctor):
         self.specialization = input("What's the doctor's specialization? ")
         self.experience = input("What's the doctor's experience (in years)? ")
 
-        self._create_specialist(database_connector)
-
-    def _create_specialist(self, database_connector):
+    def create_specialist(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Doctor(doctorID, firstname, surname, address, email, specialization, experience) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.doctor_id, self.firstname, self.surname, self.address, self.email, self.specialization, self.experience))
+        
+        RecordManager.is_row_changed(database_connector, "Specialist created", "Something went wrong, nothing was created")
         database_connector.db.commit()
