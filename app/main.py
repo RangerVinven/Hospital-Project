@@ -5,9 +5,6 @@ from menu.insurance_menu import show_insurance_menu
 from menu.doctor_menu import show_doctor_menu
 from menu.patient_menu import show_patient_menu
 
-from utils.database_connector import database_connector
-from classes.Doctors import Doctor
-
 def show_menu():
 
     while True:
