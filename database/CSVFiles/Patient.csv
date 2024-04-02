@@ -1,31 +1,31 @@
-patientID,firstname,surname,postcode,address,phone,email,insuranceID
-01YB9G9E,Iain,Ferrant,EH3 9UJ,026 Larry Drive,747 852 2741,iferrantg@amazon.de,MJ2JSHG
-12B89XAT,Lisette,Ledgerton,FK2 9LQ,1221 Acker Crossing,182 236 1523,lledgertonj@zimbio.com,MJ2JSHG
-621HD7PN,Julietta,Twinberrow,EH1 3GB,6596 Darwin Pass,660 539 6310,jtwinberrowb@ibm.com,MJ2JSHG
-6TFR6XE6,Morgen,Siddaley,BT1 1BT,33 Namekagon Court,428 683 4237,msiddaley4@unicef.org,
-7X8D058W,Lorilyn,Fuxman,DD8 2SK,34378 Hudson Circle,641 238 2990,lfuxman9@sourceforge.net,YQDN28H
-9GM3J9FK,Aindrea,Bleue,IV1 8HN,07831 Crest Line Way,382 440 0254,ableuep@youtube.com,
-AFR2WRY7,Farah,Lanchbury,AB10 7TH,9 Birchwood Pass,648 320 5941,flanchbury0@hc360.com,
-AW2DP3NZ,Stuart,Sparkwell,CB1 2LS,49988 Loeprich Court,218 979 2138,ssparkwell6@dyndns.org,
-CNWCCF76,Mufi,Prettyjohn,KA9 1ZA,87 Petterle Parkway,558 317 1675,mprettyjohns@surveymonkey.com,BS03EM0
-D42X803Q,Maureen,Ratnege,G14 0CH,2 Judy Way,968 884 3718,mratnegen@last.fm,9BFYJXV
-DX8G293R,Audi,Ballam,BT1 2FA,44 Lillian Street,430 400 8211,aballam5@cargocollective.com,9BFYJXV
-FVEJKSZQ,Lawton,Daniele,FK7 4EF,82214 Eggendart Hill,842 352 1899,ldanielek@aboutads.info,54ARPD9
-FZJXKBND,Skyler,Chichgar,EH4 8MN,5530 Independence Circle,107 609 4159,schichgarh@constantcontact.com,BS03EM0
-GRRVQAB6,Hersh,Larman,KA1 1AL,4070 Green Court,129 769 6303,hlarmanr@google.com.hk,
-H77VBDW3,Cointon,Lambdon,B1 7KK,1953 Lyons Trail,849 556 2084,clambdon2@flickr.com,YQDN28H
-J975MXD9,Brigida,Mullett,G30 2KM,8 Pine View Crossing,500 233 9097,bmulletto@google.com,BS03EM0
-JNKQ9FHQ,Garey,Tupp,EH1 0IS,8 Arizona Park,857 717 4980,gtuppa@zimbio.com,BS03EM0
-MMM4B1JV,Archer,Danilyak,KY12 5GD,38059 Eastwood Crossing,169 847 7396,adanilyakt@dropbox.com,
-MW3MMZJ7,Hyacinthie,Mattschas,G10 7HB,49 Thackeray Hill,949 472 6707,hmattschasm@ftc.gov,MJ2JSHG
-N31KQAKM,Gracia,Boscher,B1 1AA,3 Novick Point,386 847 5390,gboscher1@pinterest.com,
-NKA6X97F,Nadiya,Lamberth,BL1 2BT,3322 Hallows Hill,527 356 3328,nlamberth3@edublogs.org,MJ2JSHG
-PHXNAQJ0,Janelle,Behnecken,EH2 8BC,26 Dunning Parkway,703 686 0183,jbehneckene@craigslist.org,
-Q70FPH47,Rose,Sandal,EX10 9MN,45 3rd Point,664 709 8259,rsandali@timesonline.co.uk,YQDN28H
-R2SFDEX3,Tonye,Oldfield-Cherry,EH1 8LM,93157 Nobel Road,205 366 9275,toldfieldcherryd@fc2.com,BS03EM0
-R7SS268T,Barnett,Horsewood,EH2 9XC,2747 3rd Trail,757 685 2968,bhorsewoodf@jigsy.com,MJ2JSHG
-S8QNNAT9,Hillyer,Waye,CT16 8NB,956 Fulton Way,582 497 2018,hwaye8@psu.edu,
-TKZRTRJ5,Yule,Calder,FK7 7XZ,616 Old Shore Trail,174 130 0245,ycalderl@joomla.org,9BFYJXV
-W5A59Z49,Clevie,Billsberry,IV1 9KA,00 Colorado Drive,217 861 1093,cbillsberryq@patch.com,9BFYJXV
-WMPX90N2,Aliza,Cruess,CB6 7WG,1 Kennedy Pass,117 661 5718,acruess7@theguardian.com,
-ZWTZK6TE,Abbey,Coombes,EH1 5ND,0 Thompson Circle,777 310 0950,acoombesc@ezinearticles.com,54ARPD9
+patientID,firstname,surname,postcode,address,phone,email,insuranceID,insuranceType,insuranceDuration
+01YB9G9E,Iain,Ferrant,EH3 9UJ,026 Larry Drive,747 852 2741,iferrantg@amazon.de,MJ2JSHG,Life,10
+12B89XAT,Lisette,Ledgerton,FK2 9LQ,1221 Acker Crossing,182 236 1523,lledgertonj@zimbio.com,MJ2JSHG,Life,10
+621HD7PN,Julietta,Twinberrow,EH1 3GB,6596 Darwin Pass,660 539 6310,jtwinberrowb@ibm.com,MJ2JSHG,Life,10
+6TFR6XE6,Morgen,Siddaley,BT1 1BT,33 Namekagon Court,428 683 4237,msiddaley4@unicef.org,,Life,10
+7X8D058W,Lorilyn,Fuxman,DD8 2SK,34378 Hudson Circle,641 238 2990,lfuxman9@sourceforge.net,YQDN28H,Life,10
+9GM3J9FK,Aindrea,Bleue,IV1 8HN,07831 Crest Line Way,382 440 0254,ableuep@youtube.com,,Life,10
+AFR2WRY7,Farah,Lanchbury,AB10 7TH,9 Birchwood Pass,648 320 5941,flanchbury0@hc360.com,,Life,10
+AW2DP3NZ,Stuart,Sparkwell,CB1 2LS,49988 Loeprich Court,218 979 2138,ssparkwell6@dyndns.org,,Life,10
+CNWCCF76,Mufi,Prettyjohn,KA9 1ZA,87 Petterle Parkway,558 317 1675,mprettyjohns@surveymonkey.com,BS03EM0,Life,10
+D42X803Q,Maureen,Ratnege,G14 0CH,2 Judy Way,968 884 3718,mratnegen@last.fm,9BFYJXV,Life,10
+DX8G293R,Audi,Ballam,BT1 2FA,44 Lillian Street,430 400 8211,aballam5@cargocollective.com,9BFYJXV,Life,10
+FVEJKSZQ,Lawton,Daniele,FK7 4EF,82214 Eggendart Hill,842 352 1899,ldanielek@aboutads.info,54ARPD9,Life,10
+FZJXKBND,Skyler,Chichgar,EH4 8MN,5530 Independence Circle,107 609 4159,schichgarh@constantcontact.com,BS03EM0,Life,10
+GRRVQAB6,Hersh,Larman,KA1 1AL,4070 Green Court,129 769 6303,hlarmanr@google.com.hk,,Life,10
+H77VBDW3,Cointon,Lambdon,B1 7KK,1953 Lyons Trail,849 556 2084,clambdon2@flickr.com,YQDN28H,Life,10
+J975MXD9,Brigida,Mullett,G30 2KM,8 Pine View Crossing,500 233 9097,bmulletto@google.com,BS03EM0,Life,10
+JNKQ9FHQ,Garey,Tupp,EH1 0IS,8 Arizona Park,857 717 4980,gtuppa@zimbio.com,BS03EM0,Life,10
+MMM4B1JV,Archer,Danilyak,KY12 5GD,38059 Eastwood Crossing,169 847 7396,adanilyakt@dropbox.com,,Life,10
+MW3MMZJ7,Hyacinthie,Mattschas,G10 7HB,49 Thackeray Hill,949 472 6707,hmattschasm@ftc.gov,MJ2JSHG,Life,10
+N31KQAKM,Gracia,Boscher,B1 1AA,3 Novick Point,386 847 5390,gboscher1@pinterest.com,,Life,10
+NKA6X97F,Nadiya,Lamberth,BL1 2BT,3322 Hallows Hill,527 356 3328,nlamberth3@edublogs.org,MJ2JSHG,Life,10
+PHXNAQJ0,Janelle,Behnecken,EH2 8BC,26 Dunning Parkway,703 686 0183,jbehneckene@craigslist.org,,Life,10
+Q70FPH47,Rose,Sandal,EX10 9MN,45 3rd Point,664 709 8259,rsandali@timesonline.co.uk,YQDN28H,Life,10
+R2SFDEX3,Tonye,Oldfield-Cherry,EH1 8LM,93157 Nobel Road,205 366 9275,toldfieldcherryd@fc2.com,BS03EM0,Life,10
+R7SS268T,Barnett,Horsewood,EH2 9XC,2747 3rd Trail,757 685 2968,bhorsewoodf@jigsy.com,MJ2JSHG,Life,10
+S8QNNAT9,Hillyer,Waye,CT16 8NB,956 Fulton Way,582 497 2018,hwaye8@psu.edu,,Life,10
+TKZRTRJ5,Yule,Calder,FK7 7XZ,616 Old Shore Trail,174 130 0245,ycalderl@joomla.org,9BFYJXV,Life,10
+W5A59Z49,Clevie,Billsberry,IV1 9KA,00 Colorado Drive,217 861 1093,cbillsberryq@patch.com,9BFYJXV,Life,10
+WMPX90N2,Aliza,Cruess,CB6 7WG,1 Kennedy Pass,117 661 5718,acruess7@theguardian.com,,Life,10
+ZWTZK6TE,Abbey,Coombes,EH1 5ND,0 Thompson Circle,777 310 0950,acoombesc@ezinearticles.com,54ARPD9,Life,10
