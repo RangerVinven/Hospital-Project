@@ -3,11 +3,12 @@ from utils.database_connector import database_connector
 
 def show_drug_menu():
     menu = '''
-1. List drugs
-2. Search for a drug
-3. Edit a drug
-4. Delete a drug
-5. Back
+1. Create drug
+2. List drugs
+3. Search for a drug
+4. Edit a drug
+5. Delete a drug
+6. Back
 '''
 
     while True:

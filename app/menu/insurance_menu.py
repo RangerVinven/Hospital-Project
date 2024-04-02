@@ -3,11 +3,12 @@ from utils.database_connector import database_connector
 
 def show_insurance_menu():
     menu = '''
-1. List insurances
-2. Search for a insurance
-3. Edit a insurance
-4. Delete a insurance
-5. Back
+1. Create insurance
+2. List insurances
+3. Search for a insurance
+4. Edit a insurance
+5. Delete a insurance
+6. Back
 '''
 
     while True:

@@ -3,11 +3,12 @@ from utils.database_connector import database_connector
 
 def show_visit_menu():
     menu = '''
-1. List visits
-2. Search for a visit
-3. Edit a visit
-4. Delete a visit
-5. Back
+1. Create visit
+2. List visits
+3. Search for a visit
+4. Edit a visit
+5. Delete a visit
+6. Back
 '''
 
     while True:

@@ -3,11 +3,12 @@ from utils.database_connector import database_connector
 
 def show_patient_menu():
     menu = '''
-1. List patients
-2. Search for a patient
-3. Edit a patient
-4. Delete a patient
-5. Back
+1. Create patient
+2. List patients
+3. Search for a patient
+4. Edit a patient
+5. Delete a patient
+6. Back
 '''
 
     while True:

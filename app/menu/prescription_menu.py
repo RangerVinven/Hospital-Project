@@ -3,11 +3,12 @@ from utils.database_connector import database_connector
 
 def show_prescription_menu():
     menu = '''
-1. List prescriptions
-2. Search for a prescription
-3. Edit a prescription
-4. Delete a prescription
-5. Back
+1. Create prescription
+2. List prescriptions
+3. Search for a prescription
+4. Edit a prescription
+5. Delete a prescription
+6. Back
 '''
 
     while True:
