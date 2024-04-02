@@ -31,8 +31,10 @@ class Doctor():
         surname = input("Please enter the surname you wish to search for (leave blank if unknown): ")
         address = input("Please enter the address you wish to search for (leave blank if unknown): ")
         email = input("Please enter the email you wish to search for (leave blank if unknown): ")
+        specialization = input("Please enter the specialization you wish to search for (leave blank if unknown): ")
+        experience = input("Please enter the experience you wish to search for (leave blank if unknown): ")
 
-        query, variables = QueryBuilder.create_find_query("Doctor", ("doctorID", "firstname", "surname", "address", "email"), (id, firstname, surname, address, email))
+        query, variables = QueryBuilder.create_find_query("Doctor", ("doctorID", "firstname", "surname", "address", "email", "specialization", "experience"), (id, firstname, surname, address, email, specialization, experience))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))        
@@ -41,14 +43,17 @@ class Doctor():
     @staticmethod
     def update_doctor(database_connector):
 
-        # Gets the new item details
+        # Gets the new data
         doctor_id = input("Enter the ID of the doctor you want to update: ")
         firstname = input("Enter the new firstname (leave blank for no change): ")
         surname = input("Enter the new surname (leave blank for no change): ")
         address = input("Enter the new address (leave blank for no change): ")
         email = input("Enter the new email (leave blank for no change): ")
+        specialization = input("Enter the new specialization (leave blank for no change): ")
+        experience = input("Enter the new experience (leave blank for no change): ")
 
-        query, variables = QueryBuilder.create_update_query("Doctor", ("doctorID",), (doctor_id,), ("firstname", "surname", "address", "email"), (firstname, surname, address, email))
+        # Runs only if the object is an instance of the Doctor class
+        query, variables = QueryBuilder.create_update_query("Doctor", ("doctorID",), (doctor_id,), ("firstname", "surname", "address", "email", "specialization", "experience"), (firstname, surname, address, email, specialization, experience))
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))
@@ -65,7 +70,7 @@ class Doctor():
         database_connector.db.commit()
 
 class Specialist(Doctor):
-    def __init__(self, firstname: str, surname: str, address: str, email: str, specilization: str, experience: int):
+    def __init__(self, firstname: str, surname: str, address: str, email: str, specialization: str, experience: int):
         super().__init__(firstname, surname, address, email)
-        self.specilization = specilization
+        self.specialization = specialization
         self.experience = experience
