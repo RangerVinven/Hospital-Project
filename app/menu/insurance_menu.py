@@ -18,7 +18,7 @@ def show_insurance_menu():
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
-        # Lists all the drugs
+        # Lists all the insurances
         if selected_option == "1":
             Insurance.list_insurance(database_connector)
 

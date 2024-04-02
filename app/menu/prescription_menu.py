@@ -18,7 +18,7 @@ def show_prescription_menu():
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
-        # Lists all the drugs
+        # Lists all the prescriptions
         if selected_option == "1":
             Prescription.list_prescriptions(database_connector)
 
