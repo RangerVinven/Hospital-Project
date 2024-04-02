@@ -2,11 +2,16 @@ from menu.drug_menu import show_drug_menu
 from menu.visit_menu import show_visit_menu
 from menu.prescription_menu import show_prescription_menu
 from menu.insurance_menu import show_insurance_menu
+from menu.doctor_menu import show_doctor_menu
+from menu.patient_menu import show_patient_menu
+
+from utils.database_connector import database_connector
+from classes.Doctors import Doctor
 
 def show_menu():
 
     while True:
-        main_menu = '''    
+        main_menu = '''
     1. Patients
     2. Doctors
     3. Drugs
@@ -25,7 +30,13 @@ def show_menu():
             selected_option = input("Enter which category you'd like to interact with: ")
 
         # Shows the appropreate menu
-        if selected_option == "3":
+        if selected_option == "1":
+            show_patient_menu()
+
+        elif selected_option == "2":
+            show_doctor_menu()
+
+        elif selected_option == "3":
             show_drug_menu()
 
         elif selected_option == "4":
