@@ -15,16 +15,16 @@ def show_prescription_menu():
         print(menu)
         selected_option = input("Enter your option: ")
 
-        while selected_option not in ["1", "2", "3", "4", "5"]:
+        while selected_option not in ["1", "2", "3", "4", "5", "6"]:
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
         # Lists all the prescriptions
         if selected_option == "1":
-            Prescription.list_prescriptions(database_connector)
+            Prescription(database_connector)
 
         elif selected_option == "2":
-            Prescription.find_prescription(database_connector)
+            Prescription.list_prescriptions(database_connector)
 
         elif selected_option == "3":
             Prescription.update_prescription(database_connector)

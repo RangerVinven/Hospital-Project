@@ -15,16 +15,16 @@ def show_visit_menu():
         print(menu)
         selected_option = input("Enter your option: ")
 
-        while selected_option not in ["1", "2", "3", "4", "5"]:
+        while selected_option not in ["1", "2", "3", "4", "5", "6"]:
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
         # Lists all the visits
         if selected_option == "1":
-            Visit.list_visits(database_connector)
+            Visit(database_connector)
 
         elif selected_option == "2":
-            Visit.find_visit(database_connector)
+            Visit.list_visits(database_connector)
 
         elif selected_option == "3":
             Visit.update_visit(database_connector)
