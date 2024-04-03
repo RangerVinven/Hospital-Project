@@ -1,7 +1,7 @@
 from utils.record_manager import RecordManager
 from utils.query_builder import QueryBuilder
 from utils.id_generator import IDGenerator
-from utils.validator import Validator
+from utils.validator import Validator, TableAndColumn
 
 class Patient():
     def __init__(self, database_connector):
@@ -9,11 +9,11 @@ class Patient():
     
         self.patient_id = IDGenerator.generate_id(database_connector, 8, True, True, "Patient", "patientID")
         self.firstname = self.validator.get_input(database_connector, "What is the patient's firstname? ", { "max_length": 20 })
-        self.surname = self.validator.get_input(database_connector, "What is the patient's surname? ", { "max_length": 20 })
-        self.postcode = self.validator.get_input(database_connector, "What is the patient's postcode? ", { "max_length": 20 })
-        self.address = self.validator.get_input(database_connector, "What is the patient's address? ", { "max_length": 20 })
-        self.phone = self.validator.get_input(database_connector, "What is the patient's phone? ", { "max_length": 20 })
-        self.email = self.validator.get_input(database_connector, "What is the patient's email? ", { "max_length": 20 })
+        self.surname = self.validator.get_input(database_connector, "What is the patient's surname? ", { "max_length": 30 })
+        self.postcode = self.validator.get_input(database_connector, "What is the patient's postcode? ", { "max_length": 8 })
+        self.address = self.validator.get_input(database_connector, "What is the patient's address? ", { "max_length": 50 })
+        self.phone = self.validator.get_input(database_connector, "What is the patient's phone? ", { "max_length": 12 })
+        self.email = self.validator.get_input(database_connector, "What is the patient's email? ", { "max_length": 40 })
 
     def create_patient(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email))
@@ -84,9 +84,9 @@ class InsuredPatient(Patient):
     def __init__(self, database_connector):
         super().__init__(database_connector)
         
-        self.insurance_id = input("What is the patient's insurance's ID? ")
-        self.insurance_type = input("What is the patient's insurance type? ")
-        self.insurance_duration = input("What is the patient's insurance duration? ")
+        self.insurance_id = self.validator.get_input(database_connector, "What is the patient's insurance's ID? ", { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Insurance", column_name="insuranceID") })
+        self.insurance_type = self.validator.get_input(database_connector, "What is the patient's insurance type? ", { "max_length": 20 })
+        self.insurance_duration = self.validator.get_input(database_connector, "What is the patient's insurance duration in years? ", { "is_int": True })
 
     def create_insured_patient(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID, insuranceType, insuranceDuration) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email, self.insurance_id, self.insurance_type, self.insurance_duration))

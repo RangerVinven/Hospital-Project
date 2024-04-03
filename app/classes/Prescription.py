@@ -1,20 +1,20 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
-from utils.validator import Validator
+from utils.validator import Validator, RegexFormatMapper, TableAndColumn
 
 class Prescription():
     def __init__(self, database_connector):
         self.validator = Validator()
  
         self.prescription_id = IDGenerator.generate_id(database_connector, 10, True, False, "Prescription", "prescriptionID")
-        self.date_of_prescription = self.validator.get_input(database_connector, "What's the data of prescription? ", { "max_length": 20 })
-        self.dosage = self.validator.get_input(database_connector, "What's the prescription's dosage? ", { "max_length": 20 })
-        self.duration = self.validator.get_input(database_connector, "What's the prescription's duration? ", { "max_length": 20 })
-        self.comment = self.validator.get_input(database_connector, "What's the prescription's comment? ", { "max_length": 20 })
-        self.drug_id = self.validator.get_input(database_connector, "What's the prescription's drug's id? ", { "max_length": 20 })
-        self.doctor_id = self.validator.get_input(database_connector, "What's the prescription's doctor's id? ", { "max_length": 20 })
-        self.patient_id = self.validator.get_input(database_connector, "What's the prescription's patient's id? ", { "max_length": 20 })
+        self.date_of_prescription = self.validator.get_input(database_connector, "What's the data of prescription? ", { "is_date": True })
+        self.dosage = self.validator.get_input(database_connector, "What's the prescription's dosage? ", { "is_int": True })
+        self.duration = self.validator.get_input(database_connector, "What's the prescription's duration? ", { "is_int": True })
+        self.comment = self.validator.get_input(database_connector, "What's the prescription's comment? ", { "max_length": 200 })
+        self.drug_id = self.validator.get_input(database_connector, "What's the prescription's drug's id? ", { "max_length": 7, "exists_in_table": TableAndColumn(table_name="Drug", column_name="DrugID") })
+        self.doctor_id = self.validator.get_input(database_connector, "What's the prescription's doctor's id? ", { "max_length": 4, "exists_in_table": TableAndColumn(table_name="Doctor", column_name="DoctorID") })
+        self.patient_id = self.validator.get_input(database_connector, "What's the prescription's patient's id? ", { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Patient", column_name="PatientID") })
         
         self._create_prescription(database_connector)
 

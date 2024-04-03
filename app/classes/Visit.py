@@ -1,16 +1,16 @@
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
-from utils.validator import Validator
+from utils.validator import Validator, TableAndColumn
 
 class Visit():
     def __init__(self, database_connector):
         self.validator = Validator()
     
-        self.patient_id = self.validator.get_input(database_connector, "What's the patient's id? ", { "max_length": 20 })
-        self.doctor_id = self.validator.get_input(database_connector, "What's the doctor's id? ", { "max_length": 20 })
-        self.date_of_visit = self.validator.get_input(database_connector, "What's the visit date (YYYY-MM-DD)? ", { "max_length": 20 })
-        self.symptoms = self.validator.get_input(database_connector, "What's the patient's symptoms? ", { "max_length": 20 })
-        self.diagnosis = self.validator.get_input(database_connector, "What's the patient's diagnosis? ", { "max_length": 20 })
+        self.patient_id = self.validator.get_input(database_connector, "What's the patient's id? ", { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Patient", column_name="patientID") })
+        self.doctor_id = self.validator.get_input(database_connector, "What's the doctor's id? ", { "max_length": 4, "exists_in_table": TableAndColumn(table_name="Doctor", column_name="doctorID")})
+        self.date_of_visit = self.validator.get_input(database_connector, "What's the visit date (YYYY-MM-DD)? ", { "is_date": True })
+        self.symptoms = self.validator.get_input(database_connector, "What's the patient's symptoms? ", { "max_length": 200 })
+        self.diagnosis = self.validator.get_input(database_connector, "What's the patient's diagnosis? ", { "max_length": 50 })
         
         self._create_visit(database_connector)
     
