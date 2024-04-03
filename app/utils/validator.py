@@ -1,5 +1,7 @@
 from typing import TypedDict, NotRequired
+
 import re
+from datetime import date
 
 class TableAndColumn(TypedDict):
     table_name: str
@@ -13,6 +15,7 @@ class Options(TypedDict):
     max_length: NotRequired[int]
     min_length: NotRequired[int]
     is_int: NotRequired[bool] 
+    is_date: NotRequired[bool] 
     exists_in_table: NotRequired[TableAndColumn]
     unique: NotRequired[TableAndColumn]
     regex: NotRequired[RegexFormatMapper]
@@ -104,7 +107,22 @@ class Validator():
                 print("Invalid format. The correct format is {}.".format(correct_format))
                 user_input = self.prompt_user(input_message)
 
+        
+        if "is_date" in options:
+            if options["is_date"]:
+                incorrect_format = True
+
+                # Loops until the user enters a correct date
+                while incorrect_format:
+                    try:
+                        date.fromisoformat(user_input)
+                        incorrect_format = False
+                    
+                    except ValueError:
+                        print("Invalid date. Must be a valid date in the YYYY-MM-DD format")
+                        user_input = self.prompt_user(input_message)
+
         return user_input
 
 # validator = Validator()
-# validator.get_input("", input_message="Number. Now", options={ "is_int": True })
+# validator.get_input("", input_message="date", options={ "is_date": True })
