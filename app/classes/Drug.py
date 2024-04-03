@@ -3,11 +3,11 @@ from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
 
 class Drug():
-    def __init__(self, database_connector, name, side_effects, benefits):
+    def __init__(self, database_connector):
         self.drug_id = IDGenerator.generate_id(db_connector=database_connector, id_length=7, hasNumbers=True, hasLetters=False, table="Drug", id_column_name="drugID")
-        self.name = name
-        self.side_effects = side_effects
-        self.benefits = benefits
+        self.name = input("What's the drug's name? ")
+        self.side_effects = input("What's the drug's side effects? ")
+        self.benefits = input("What's the drug's benefits? ")
 
         self._create_drug(database_connector)
 

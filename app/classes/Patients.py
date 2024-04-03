@@ -3,20 +3,19 @@ from utils.query_builder import QueryBuilder
 from utils.id_generator import IDGenerator
 
 class Patient():
-    def __init__(self, database_connector, firstname, surname, postcode, address, phone, email, insurance_ID):
+    def __init__(self, database_connector):
         self.patient_id = IDGenerator.generate_id(database_connector, 8, True, True, "Patient", "patientID")
-        self.firstname = firstname
-        self.surname = surname
-        self.postcode = postcode
-        self.address = address
-        self.phone = phone
-        self.email = email
-        self.insurance_id = insurance_ID
+        self.firstname = input("What is the patient's firstname? ")
+        self.surname = input("What is the patient's surname? ")
+        self.postcode = input("What is the patient's postcode? ")
+        self.address = input("What is the patient's address? ")
+        self.phone = input("What is the patient's phone? ")
+        self.email = input("What is the patient's email? ")
 
-        self._create_patient(database_connector)
-
-    def _create_patient(self, database_connector):
-        database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID) VALUES (%s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.address, self.email, self.insurance_id))
+    def create_patient(self, database_connector):
+        database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email))
+        
+        RecordManager.is_row_changed(database_connector, "Patient created", "Something went wrong, no patient created")
         database_connector.db.commit()
 
     # Returns all the patient companies
@@ -79,14 +78,15 @@ class Patient():
 
 
 class InsuredPatient(Patient):
-    def __init__(self, firstname, surname, postcode, address, phone, email, insurance_type, insurance_duration):
-        super().__init__(firstname, surname, postcode, address, phone, email)
+    def __init__(self, database_connector):
+        super().__init__(database_connector)
         
-        self.insurance_type = insurance_type
-        self.insurance_duration = insurance_duration
+        self.insurance_id = input("What is the patient's insurance's ID? ")
+        self.insurance_type = input("What is the patient's insurance type? ")
+        self.insurance_duration = input("What is the patient's insurance duration? ")
 
-        self._create_patient()
+    def create_insured_patient(self, database_connector):
+        database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID, insuranceType, insuranceDuration) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email, self.insurance_id, self.insurance_type, self.insurance_duration))
 
-    def _create_patient(self, database_connector):
-        database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID, insuranceType, insuranceDuration) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.address, self.email, self.insurance_id, self.insurance_type, self.insurance_duration))
+        RecordManager.is_row_changed(database_connector, "Patient created", "Something went wrong, no patient created")
         database_connector.db.commit()

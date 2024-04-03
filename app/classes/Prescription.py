@@ -3,19 +3,19 @@ from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
 
 class Prescription():
-    def __init__(self, database_connector, date_of_prescription, dosage, duration, comment, drug_id, doctor_id, patient_id):
+    def __init__(self, database_connector):
         self.prescription_id = IDGenerator.generate_id(database_connector, 10, True, False, "Prescription", "prescriptionID")
-        self.date_of_prescription = date_of_prescription
-        self.dosage = dosage
-        self.duration = duration
-        self.comment = comment
-        self.drug_id = drug_id
-        self.doctor_id = doctor_id
-        self.patient_id = patient_id
-
+        self.date_of_prescription = input("What's the prescription's data of prescription? ")
+        self.dosage = input("What's the prescription's dosage? ")
+        self.duration = input("What's the prescription's duration? ")
+        self.comment = input("What's the prescription's comment? ")
+        self.drug_id = input("What's the prescription's drug's id? ")
+        self.doctor_id = input("What's the prescription's doctor's id? ")
+        self.patient_id = input("What's the prescription's patient's id? ")
+        
         self._create_prescription(database_connector)
 
-    # Creates the prescription
+    # _Creates the prescription
     def _create_prescription(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Prescription (prescriptionID, dateprescribed, dosage, duration, comment, drugID, doctorID, patientID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);", (self.prescription_id, self.date_of_prescription, self.dosage, self.duration, self.comment, self.drug_id, self.doctor_id, self.patient_id))
         database_connector.db.commit()

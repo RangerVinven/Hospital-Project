@@ -3,14 +3,14 @@ from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
 
 class Insurance():
-    def __init__(self, database_connector, company, address, phone):
+    def __init__(self, database_connector):
        self.insurance_id = IDGenerator.generate_id(database_connector, 7, True, True, "Insurance", "insuranceID")
-       self.company = company
-       self.address = address
-       self.phone = phone
-
+       self.company = input("What's the insurance's company name? ")
+       self.address = input("What's the insurance's address? ")
+       self.phone = input("What's the insurance's phone number? ")
+       
        self._create_insurance(database_connector)
-
+       
     # Inserts the insurance into the table
     def _create_insurance(self, database_connector): 
         database_connector.cursor.execute("INSERT INTO Insurance (insuranceID, company, address, phone) VALUES (%s, %s, %s, %s);", (self.insurance_id, self.company, self.address, self.phone))

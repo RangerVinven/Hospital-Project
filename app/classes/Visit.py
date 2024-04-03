@@ -2,15 +2,15 @@ from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
 
 class Visit():
-    def __init__(self, database_connector, patient_id, doctor_id, date_of_visit, symptoms, diagnosis):
-        self.patient_id = patient_id
-        self.doctor_id = doctor_id
-        self.date_of_visit = date_of_visit
-        self.symptoms = symptoms
-        self.diagnosis = diagnosis
-
+    def __init__(self, database_connector):
+        self.patient_id = input("What's the patient's id? ")
+        self.doctor_id = input("What's the doctor's id? ")
+        self.date_of_visit = input("What's the visit date (YYYY-MM-DD)? ")
+        self.symptoms = input("What's the patient's symptoms? ")
+        self.diagnosis = input("What's the patient's diagnosis? ")
+        
         self._create_visit(database_connector)
-
+    
     def _create_visit(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Visit (patientID, doctorID, dateofvisit, symptoms, diagnosis) VALUES (%s, %s, %s, %s, %s);", (self.patient_id, self.doctor_id, self.date_of_visit, self.symptoms, self.diagnosis))
         database_connector.db.commit()
