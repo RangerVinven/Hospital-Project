@@ -1,16 +1,19 @@
 from utils.record_manager import RecordManager
 from utils.query_builder import QueryBuilder
 from utils.id_generator import IDGenerator
+from utils.validator import Validator
 
 class Patient():
     def __init__(self, database_connector):
+        self.validator = Validator()
+    
         self.patient_id = IDGenerator.generate_id(database_connector, 8, True, True, "Patient", "patientID")
-        self.firstname = input("What is the patient's firstname? ")
-        self.surname = input("What is the patient's surname? ")
-        self.postcode = input("What is the patient's postcode? ")
-        self.address = input("What is the patient's address? ")
-        self.phone = input("What is the patient's phone? ")
-        self.email = input("What is the patient's email? ")
+        self.firstname = self.validator.get_input(database_connector, "What is the patient's firstname? ", { "max_length": 20 })
+        self.surname = self.validator.get_input(database_connector, "What is the patient's surname? ", { "max_length": 20 })
+        self.postcode = self.validator.get_input(database_connector, "What is the patient's postcode? ", { "max_length": 20 })
+        self.address = self.validator.get_input(database_connector, "What is the patient's address? ", { "max_length": 20 })
+        self.phone = self.validator.get_input(database_connector, "What is the patient's phone? ", { "max_length": 20 })
+        self.email = self.validator.get_input(database_connector, "What is the patient's email? ", { "max_length": 20 })
 
     def create_patient(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email))

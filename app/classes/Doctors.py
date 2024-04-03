@@ -1,14 +1,18 @@
 from utils.record_manager import RecordManager
 from utils.query_builder import QueryBuilder
 from utils.id_generator import IDGenerator
+from utils.validator import Validator
+
 
 class Doctor():
     def __init__(self, database_connector):
-        self.doctor_id = IDGenerator.generate_id(database_connector, 4, True, True, "Doctor", "doctorID")
-        self.firstname = input("What's the doctor's firstname? ")
-        self.surname = input("What's the doctor's surname? ")
-        self.address = input("What's the doctor's address? ")
-        self.email = input("What's the doctor's email? ")
+        self.validator = Validator()
+
+        self.doctor_id = IDGenerator.generate_id(database_connector, 4, True, False, "Doctor", "doctorID")
+        self.firstname = self.validator.get_input(database_connector, "What's the doctor's firstname? ", { "max_length": 20 })
+        self.surname = self.validator.get_input(database_connector, "What's the doctor's surname? ", { "max_length": 30 })
+        self.address = self.validator.get_input(database_connector, "What's the doctor's address? ", { "max_length": 50 })
+        self.email = self.validator.get_input(database_connector, "What's the doctor's email? ", { "max_length": 40 })
 
     def create_doctor(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Doctor(doctorID, firstname, surname, address, email) VALUES (%s, %s, %s, %s, %s);", (self.doctor_id, self.firstname, self.surname, self.address, self.email))
@@ -72,8 +76,8 @@ class Doctor():
 class Specialist(Doctor):
     def __init__(self, database_connector):
         super().__init__(database_connector)
-        self.specialization = input("What's the doctor's specialization? ")
-        self.experience = input("What's the doctor's experience (in years)? ")
+        self.specialization = self.validator.get_input(database_connector, "What's the doctor's specialization? ", { "max_length": 25 })
+        self.experience = self.validator.get_input(database_connector, "What's the doctor's experience (in years)? ", { "is_int": True })
 
     def create_specialist(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Doctor(doctorID, firstname, surname, address, email, specialization, experience) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.doctor_id, self.firstname, self.surname, self.address, self.email, self.specialization, self.experience))

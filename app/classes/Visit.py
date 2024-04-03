@@ -1,13 +1,16 @@
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
+from utils.validator import Validator
 
 class Visit():
     def __init__(self, database_connector):
-        self.patient_id = input("What's the patient's id? ")
-        self.doctor_id = input("What's the doctor's id? ")
-        self.date_of_visit = input("What's the visit date (YYYY-MM-DD)? ")
-        self.symptoms = input("What's the patient's symptoms? ")
-        self.diagnosis = input("What's the patient's diagnosis? ")
+        self.validator = Validator()
+    
+        self.patient_id = self.validator.get_input(database_connector, "What's the patient's id? ", { "max_length": 20 })
+        self.doctor_id = self.validator.get_input(database_connector, "What's the doctor's id? ", { "max_length": 20 })
+        self.date_of_visit = self.validator.get_input(database_connector, "What's the visit date (YYYY-MM-DD)? ", { "max_length": 20 })
+        self.symptoms = self.validator.get_input(database_connector, "What's the patient's symptoms? ", { "max_length": 20 })
+        self.diagnosis = self.validator.get_input(database_connector, "What's the patient's diagnosis? ", { "max_length": 20 })
         
         self._create_visit(database_connector)
     

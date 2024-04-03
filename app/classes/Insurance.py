@@ -1,15 +1,18 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
+from utils.validator import Validator
 
 class Insurance():
     def __init__(self, database_connector):
-       self.insurance_id = IDGenerator.generate_id(database_connector, 7, True, True, "Insurance", "insuranceID")
-       self.company = input("What's the insurance's company name? ")
-       self.address = input("What's the insurance's address? ")
-       self.phone = input("What's the insurance's phone number? ")
-       
-       self._create_insurance(database_connector)
+        self.validator = Validator()
+    
+        self.insurance_id = IDGenerator.generate_id(database_connector, 7, True, True, "Insurance", "insuranceID")
+        self.company = self.validator.get_input(database_connector, "What's the insurance's company name? ", { "max_length": 20 })
+        self.address = self.validator.get_input(database_connector, "What's the insurance's address? ", { "max_length": 20 })
+        self.phone = self.validator.get_input(database_connector, "What's the insurance's phone number? ", { "max_length": 20 })
+        
+        self._create_insurance(database_connector)
        
     # Inserts the insurance into the table
     def _create_insurance(self, database_connector): 

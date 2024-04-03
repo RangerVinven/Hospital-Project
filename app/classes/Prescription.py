@@ -1,17 +1,20 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
+from utils.validator import Validator
 
 class Prescription():
     def __init__(self, database_connector):
+        self.validator = Validator()
+ 
         self.prescription_id = IDGenerator.generate_id(database_connector, 10, True, False, "Prescription", "prescriptionID")
-        self.date_of_prescription = input("What's the prescription's data of prescription? ")
-        self.dosage = input("What's the prescription's dosage? ")
-        self.duration = input("What's the prescription's duration? ")
-        self.comment = input("What's the prescription's comment? ")
-        self.drug_id = input("What's the prescription's drug's id? ")
-        self.doctor_id = input("What's the prescription's doctor's id? ")
-        self.patient_id = input("What's the prescription's patient's id? ")
+        self.date_of_prescription = self.validator.get_input(database_connector, "What's the data of prescription? ", { "max_length": 20 })
+        self.dosage = self.validator.get_input(database_connector, "What's the prescription's dosage? ", { "max_length": 20 })
+        self.duration = self.validator.get_input(database_connector, "What's the prescription's duration? ", { "max_length": 20 })
+        self.comment = self.validator.get_input(database_connector, "What's the prescription's comment? ", { "max_length": 20 })
+        self.drug_id = self.validator.get_input(database_connector, "What's the prescription's drug's id? ", { "max_length": 20 })
+        self.doctor_id = self.validator.get_input(database_connector, "What's the prescription's doctor's id? ", { "max_length": 20 })
+        self.patient_id = self.validator.get_input(database_connector, "What's the prescription's patient's id? ", { "max_length": 20 })
         
         self._create_prescription(database_connector)
 

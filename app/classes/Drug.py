@@ -1,13 +1,16 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
+from utils.validator import Validator
 
 class Drug():
     def __init__(self, database_connector):
+        self.validator = Validator()
+        
         self.drug_id = IDGenerator.generate_id(db_connector=database_connector, id_length=7, hasNumbers=True, hasLetters=False, table="Drug", id_column_name="drugID")
-        self.name = input("What's the drug's name? ")
-        self.side_effects = input("What's the drug's side effects? ")
-        self.benefits = input("What's the drug's benefits? ")
+        self.name = self.validator.get_input(database_connector, "What's the drug's name? ", { "max_length": 20 })
+        self.side_effects = self.validator.get_input(database_connector, "What's the drug's side effects? ", { "max_length": 20 })
+        self.benefits = self.validator.get_input(database_connector, "What's the drug's benefits? ", { "max_length": 20 })
 
         self._create_drug(database_connector)
 
