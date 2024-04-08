@@ -1,17 +1,24 @@
 from utils.id_generator import IDGenerator
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
-from utils.validator import Validator, RegexFormatMapper
+from utils.validator import Validator, ColumnOptionMapper, RegexFormatMapper
 
 class Insurance():
     def __init__(self, database_connector):
-        self.validator = Validator()
+        self.validator = Validator() 
+        self.column_options = {
+            "insurance_id": { "max_length": 7 },
+            "company": { "max_length": 45 },
+            "address": { "max_length": 50 },
+            "phone": { "max_length": 14, "regex": RegexFormatMapper(regex="^\d\d\d-\d\d\d-\d\d\d\d", correct_format="###-###-####") },
+        }
     
         self.insurance_id = IDGenerator.generate_id(database_connector, 7, True, True, "Insurance", "insuranceID")
-        self.company = self.validator.get_input(database_connector, "What's the insurance's company name? ", { "max_length": 45 })
-        self.address = self.validator.get_input(database_connector, "What's the insurance's address? ", { "max_length": 50 })
-        self.phone = self.validator.get_input(database_connector, "What's the insurance's phone number? ", { "max_length": 14, "regex": RegexFormatMapper(regex="^\d\d\d-\d\d\d-\d\d\d\d", correct_format="###-###-####") })
-        
+        self.company = self.validator.get_input(database_connector, "What's the insurance's company name? ", self.column_options["company"])
+        self.address = self.validator.get_input(database_connector, "What's the insurance's address? ", self.column_options["address"])
+        self.phone = self.validator.get_input(database_connector, "What's the insurance's phone number? ", self.column_options["phone"])
+
+
         self._create_insurance(database_connector)
        
     # Inserts the insurance into the table
@@ -44,10 +51,10 @@ class Insurance():
     def update_insurance(database_connector):
 
         # Gets the new item details
-        insurance_id = input("Enter the ID of the insurance company you want to update: ")
-        company = input("Enter the new company name (leave blank for no change): ")
-        address = input("Enter the new company address (leave blank for no change): ")
-        phone = input("Enter the new company phone (leave blank for no change): ")
+        insurance_id = self.validator.get_input(database_connector, "Enter the ID of the insurance company you want to update: ", self.column_options["insurance_id"])
+        company = self.validator.get_input(database_connector, "Enter the new company name (leave blank for no change): ", self.column_options["company"])
+        address = self.validator.get_input(database_connector, "Enter the new company address (leave blank for no change): ", self.column_options["address"])
+        phone = self.validator.get_input(database_connector, "Enter the new company phone (leave blank for no change): ", self.column_options["phone"])
 
         query, variables = QueryBuilder.create_update_query("Insurance", ["insuranceID"], [insurance_id], ("company", "address", "phone"), (company, address, phone))
 

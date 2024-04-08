@@ -1,16 +1,23 @@
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
-from utils.validator import Validator, TableAndColumn
+from utils.validator import Validator, TableAndColumn, ColumnOptionMapper
 
 class Visit():
     def __init__(self, database_connector):
         self.validator = Validator()
-    
-        self.patient_id = self.validator.get_input(database_connector, "What's the patient's id? ", { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Patient", column_name="patientID") })
-        self.doctor_id = self.validator.get_input(database_connector, "What's the doctor's id? ", { "max_length": 4, "exists_in_table": TableAndColumn(table_name="Doctor", column_name="doctorID")})
-        self.date_of_visit = self.validator.get_input(database_connector, "What's the visit date (YYYY-MM-DD)? ", { "is_date": True })
-        self.symptoms = self.validator.get_input(database_connector, "What's the patient's symptoms? ", { "max_length": 200 })
-        self.diagnosis = self.validator.get_input(database_connector, "What's the patient's diagnosis? ", { "max_length": 50 })
+        self.column_options = {
+            "patient_id": { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Patient", column_name="patientID") },
+            "doctor_id": { "max_length": 4, "exists_in_table": TableAndColumn(table_name="Doctor", column_name="doctorID")},
+            "date_of_visit": { "is_date": True },
+            "symptoms": { "max_length": 200 },
+            "diagnosis": { "max_length": 50 }
+        }
+
+        self.patient_id = self.validator.get_input(database_connector, "What's the patient's id? ", self.column_options["patient_id"])
+        self.doctor_id = self.validator.get_input(database_connector, "What's the doctor's id? ", self.column_options["doctor_id"])
+        self.date_of_visit = self.validator.get_input(database_connector, "What's the visit date (YYYY-MM-DD)? ", self.column_options["date_of_visit"])
+        self.symptoms = self.validator.get_input(database_connector, "What's the patient's symptoms? ", self.column_options["symptoms"])
+        self.diagnosis = self.validator.get_input(database_connector, "What's the patient's diagnosis? ", self.column_options["diagnosis"])
         
         self._create_visit(database_connector)
     
@@ -24,12 +31,12 @@ class Visit():
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     @staticmethod
-    def find_visit(database_connector):
-        patient_id = input("Please enter the patient's id (or leave blank): ")
-        doctor_id = input("Please enter the doctor's id (or leave blank): ")
-        date_of_visit = input("Please enter the date of visit in YYYY-MM-DD format (or leave blank): ")
-        symptoms = input("Please enter the symptoms (or leave blank): ")
-        diagnosis = input("Please enter the diagnosis (or leave blank): ")
+    def find_visit(self, database_connector):
+        patient_id = self.validator.get_input(database_connector, "Please enter the patient's id (or leave blank): ", self.column_options["patient_id"])
+        doctor_id = self.validator.get_input(database_connector, "Please enter the doctor's id (or leave blank): ", self.column_options[""])
+        date_of_visit = self.validator.get_input(database_connector, "Please enter the date of visit in YYYY-MM-DD format (or leave blank): ", self.column_options["date_of_visit"])
+        symptoms = self.validator.get_input(database_connector, "Please enter the symptoms (or leave blank): ", self.column_options["symptoms"])
+        diagnosis = self.validator.get_input(database_connector, "Please enter the diagnosis (or leave blank): ", self.column_options["diagnosis"])
 
         query, variables = QueryBuilder.create_find_query("Visit", ("patientID", "doctorID", "dateofvisit", "symptoms", "diagnosis"), (patient_id, doctor_id, date_of_visit, symptoms, diagnosis))
 
@@ -37,16 +44,16 @@ class Visit():
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     @staticmethod
-    def update_visit(database_connector):
-        patient_id = input("Please enter the patient's id (needed to identify the record): ")  # To find the specific record
-        doctor_id = input("Please enter the doctor's id  (needed to identify the record): ")  # To find the specific record
-        date_of_visit = input("Please enter the date of visit in YYYY-MM-DD format (needed to identify the record): ")  # To find the specific record
+    def update_visit(self, database_connector):
+        patient_id = self.validator.get_input(database_connector, "Please enter the patient's id (needed to identify the record): ", self.column_options["patient_id"])  
+        doctor_id = self.validator.get_input(database_connector, "Please enter the doctor's id  (needed to identify the record): ", self.column_options["doctor_id"])  
+        date_of_visit = self.validator.get_input(database_connector, "Please enter the date of visit in YYYY-MM-DD format (needed to identify the record): ", self.column_options["date_of_visit"])  
 
-        new_patient_id = input("Please enter the new patient's id (or leave blank for no change): ")  # To find the specific record
-        new_doctor_id = input("Please enter the new doctor's id (or leave blank for no change): ")  # To find the specific record
-        new_date_of_visit = input("Please enter the new date of visit in YYYY-MM-DD format (or leave blank for no change): ")  # To find the specific record
-        symptoms = input("Please enter the new symptoms (or leave blank for no change): ")  # To update the record
-        diagnosis = input("Please enter the new diagnosis (or leave blank for no change): ")  # To update the record
+        new_patient_id = self.validator.get_input(database_connector, "Please enter the new patient's id (or leave blank for no change): ", self.column_options["new_patient_id"])  
+        new_doctor_id = self.validator.get_input(database_connector, "Please enter the new doctor's id (or leave blank for no change): ", self.column_options["new_doctor_id"])  
+        new_date_of_visit = self.validator.get_input(database_connector, "Please enter the new date of visit in YYYY-MM-DD format (or leave blank for no change): ", self.column_options["new_date_of_visit"])  
+        symptoms = self.validator.get_input(database_connector, "Please enter the new symptoms (or leave blank for no change): ", self.column_options["symptoms"])  
+        diagnosis = self.validator.get_input(database_connector, "Please enter the new diagnosis (or leave blank for no change): ", self.column_options["diagnosis"])  
 
         query, variables = QueryBuilder.create_update_query("Visit", ["patientID", "doctorID", "dateofvisit"], [patient_id, doctor_id, date_of_visit], ("patientID", "doctorID", "dateofvisit", "symptoms", "diagnosis"), (new_patient_id, new_doctor_id, new_date_of_visit, symptoms, diagnosis))
         database_connector.cursor.execute(query, tuple(variables))

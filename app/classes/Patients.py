@@ -1,19 +1,28 @@
 from utils.record_manager import RecordManager
 from utils.query_builder import QueryBuilder
 from utils.id_generator import IDGenerator
-from utils.validator import Validator, TableAndColumn
+from utils.validator import Validator, ColumnOptionMapper, TableAndColumn
 
 class Patient():
     def __init__(self, database_connector):
         self.validator = Validator()
+        self.column_options = {
+            "patient_id": { "max_length":  8 },
+            "firstname": { "max_length": 20 },
+            "surname": { "max_length": 30 },
+            "postcode": { "max_length": 8 },
+            "address": { "max_length": 50 },
+            "phone": { "max_length": 12 },
+            "email": { "max_length": 40 },
+        }
     
         self.patient_id = IDGenerator.generate_id(database_connector, 8, True, True, "Patient", "patientID")
-        self.firstname = self.validator.get_input(database_connector, "What is the patient's firstname? ", { "max_length": 20 })
-        self.surname = self.validator.get_input(database_connector, "What is the patient's surname? ", { "max_length": 30 })
-        self.postcode = self.validator.get_input(database_connector, "What is the patient's postcode? ", { "max_length": 8 })
-        self.address = self.validator.get_input(database_connector, "What is the patient's address? ", { "max_length": 50 })
-        self.phone = self.validator.get_input(database_connector, "What is the patient's phone? ", { "max_length": 12 })
-        self.email = self.validator.get_input(database_connector, "What is the patient's email? ", { "max_length": 40 })
+        self.firstname = self.validator.get_input(database_connector, "What is the patient's firstname? ", self.column_options["firstname"])
+        self.surname = self.validator.get_input(database_connector, "What is the patient's surname? ", self.column_options["surname"])
+        self.postcode = self.validator.get_input(database_connector, "What is the patient's postcode? ", self.column_options["postcode"])
+        self.address = self.validator.get_input(database_connector, "What is the patient's address? ", self.column_options["address"])
+        self.phone = self.validator.get_input(database_connector, "What is the patient's phone? ", self.column_options["phone"])
+        self.email = self.validator.get_input(database_connector, "What is the patient's email? ", self.column_options["email"])
 
     def create_patient(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email))
@@ -31,16 +40,16 @@ class Patient():
     @staticmethod
     def find_patient(database_connector):
         # Gets the items the user wishes to change
-        id = input("Please enter the ID of the patient you wish to search for (leave blank if unknown): ")
-        firstname = input("Please enter the firstname you wish to search for (leave blank if unknown): ")
-        surname = input("Please enter the surname you wish to search for (leave blank if unknown): ")
-        postcode = input("Please enter the postcode you wish to search for (leave blank if unknown): ")
-        address = input("Please enter the address you wish to search for (leave blank if unknown): ")
-        phone = input("Please enter the phone you wish to search for (leave blank if unknown): ")
-        email = input("Please enter the email you wish to search for (leave blank if unknown): ")
-        insurance_id = input("Please enter the insurance id you wish to search for (leave blank if unknown): ")
-        insurance_type = input("Please enter the insurance type you wish to search for (leave blank if unknown): ")
-        insurance_duration = input("Please enter the insurance duration you wish to search for (leave blank if unknown): ")
+        id = self.validator.get_input(database_connector, "Please enter the ID of the patient you wish to search for (leave blank if unknown): ", self.column_options["id"])
+        firstname = self.validator.get_input(database_connector, "Please enter the firstname you wish to search for (leave blank if unknown): ", self.column_options["firstname"])
+        surname = self.validator.get_input(database_connector, "Please enter the surname you wish to search for (leave blank if unknown): ", self.column_options["surname"])
+        postcode = self.validator.get_input(database_connector, "Please enter the postcode you wish to search for (leave blank if unknown): ", self.column_options["postcode"])
+        address = self.validator.get_input(database_connector, "Please enter the address you wish to search for (leave blank if unknown): ", self.column_options["address"])
+        phone = self.validator.get_input(database_connector, "Please enter the phone you wish to search for (leave blank if unknown): ", self.column_options["phone"])
+        email = self.validator.get_input(database_connector, "Please enter the email you wish to search for (leave blank if unknown): ", self.column_options["email"])
+        insurance_id = self.validator.get_input(database_connector, "Please enter the insurance id you wish to search for (leave blank if unknown): ", self.column_options["insurance_id"])
+        insurance_type = self.validator.get_input(database_connector, "Please enter the insurance type you wish to search for (leave blank if unknown): ", self.column_options["insurance_type"])
+        insurance_duration = self.validator.get_input(database_connector, "Please enter the insurance duration you wish to search for (leave blank if unknown): ", self.column_options["insurance_duration"])
         
         query, variables = QueryBuilder.create_find_query("Patient", ("patientID", "firstname", "surname", "postcode", "address", "phone", "email", "insuranceID", "insuranceType", "insuranceDuration"), (id, firstname, surname, postcode, address, phone, email, insurance_id, insurance_type, insurance_duration))
 
@@ -52,16 +61,16 @@ class Patient():
     def update_patient(database_connector):
 
         # Gets the new item details
-        patient_id = input("Enter the ID of the patient you want to update: ")
-        firstname = input("Enter the new firstname (leave blank for no change): ")
-        surname = input("Enter the new surname (leave blank for no change): ")
-        postcode = input("Enter the new postcode (leave blank for no change): ")
-        address = input("Enter the new address (leave blank for no change): ")
-        phone = input("Enter the new phone (leave blank for no change): ")
-        email = input("Enter the new email (leave blank for no change): ")
-        insurance_id = input("Enter the new insurance id (leave blank for no change): ")
-        insurance_type = input("Enter the new insurance type (leave blank for no change): ")
-        insurance_duration = input("Enter the new insurance duration (leave blank for no change): ")
+        patient_id = self.validator.get_input(database_connector, "Enter the ID of the patient you want to update: ", self.column_options["patient_id"])
+        firstname = self.validator.get_input(database_connector, "Enter the new firstname (leave blank for no change): ", self.column_options["firstname"])
+        surname = self.validator.get_input(database_connector, "Enter the new surname (leave blank for no change): ", self.column_options["surname"])
+        postcode = self.validator.get_input(database_connector, "Enter the new postcode (leave blank for no change): ", self.column_options["postcode"])
+        address = self.validator.get_input(database_connector, "Enter the new address (leave blank for no change): ", self.column_options["address"])
+        phone = self.validator.get_input(database_connector, "Enter the new phone (leave blank for no change): ", self.column_options["phone"])
+        email = self.validator.get_input(database_connector, "Enter the new email (leave blank for no change): ", self.column_options["email"])
+        insurance_id = self.validator.get_input(database_connector, "Enter the new insurance id (leave blank for no change): ", self.column_options["insurance_id"])
+        insurance_type = self.validator.get_input(database_connector, "Enter the new insurance type (leave blank for no change): ", self.column_options["insurance_type"])
+        insurance_duration = self.validator.get_input(database_connector, "Enter the new insurance duration (leave blank for no change): ", self.column_options["insurance_duration"])
 
         query, variables = QueryBuilder.create_update_query("Patient", ("patientID",), (patient_id,), ("firstname", "surname", "postcode", "address", "phone", "email", "insuranceID", "insuranceType", "insuranceDuration"), (firstname, surname, postcode, address, phone, email, insurance_id, insurance_type, insurance_duration))
 
