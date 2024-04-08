@@ -20,6 +20,11 @@ class Options(TypedDict):
     unique: NotRequired[TableAndColumn]
     regex: NotRequired[RegexFormatMapper]
 
+# Maps a column (i.e, patient_id) with the validation Options for that column
+class ColumnOptionMapper(TypedDict):
+    column_name: str
+    options: Options
+
 class Validator():
 
     def __init__(self):
