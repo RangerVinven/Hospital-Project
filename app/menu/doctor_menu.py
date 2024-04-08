@@ -1,5 +1,4 @@
-from classes.Doctors import Doctor
-from classes.Doctors import Specialist
+from classes.Doctors import Doctor, Specialist
 
 from utils.database_connector import database_connector
 
@@ -12,6 +11,8 @@ def show_doctor_menu():
 5. Delete a doctor
 6. Back
 '''
+
+    doctor = Doctor()
 
     while True:
         print(menu)
@@ -36,20 +37,19 @@ def show_doctor_menu():
 
             # Creates a doctor
             else:
-                doctor = Doctor(database_connector)
                 doctor.create_doctor(database_connector)
 
         elif selected_option == "2":
-            Doctor.list_doctors(database_connector)
+            doctor.list_doctors(database_connector)
 
         elif selected_option == "3":
-            Doctor.find_doctor(database_connector)
+            doctor.find_doctor(database_connector)
 
         elif selected_option == "4":
-            Doctor.update_doctor(database_connector)
+            doctor.update_doctor(database_connector)
 
         elif selected_option == "5":
-            Doctor.delete_doctor(database_connector)
+            doctor.delete_doctor(database_connector)
 
         else:
             break

@@ -11,6 +11,9 @@ def show_drug_menu():
 6. Back
 '''
 
+
+    drug = Drug()
+
     while True:
         print(menu)
         selected_option = input("Enter your option: ")
@@ -21,19 +24,19 @@ def show_drug_menu():
 
         # Lists all the drugs
         if selected_option == "1":
-            Drug(database_connector)
+            drug.create_drug(database_connector)
 
         elif selected_option == "2":
-            Drug.list_drugs(database_connector)
+            drug.list_drugs(database_connector)
 
         elif selected_option == "3":
-            Drug.find_drug(database_connector)
+            drug.find_drug(database_connector)
 
         elif selected_option == "4":
-            Drug.update_drug(database_connector)
+            drug.update_drug(database_connector)
 
         elif selected_option == "5":
-            Drug.delete_drug(database_connector)
+            drug.delete_drug(database_connector)
 
         else:
             break
