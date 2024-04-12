@@ -31,7 +31,7 @@ class Validator():
         pass
 
     def prompt_user(self, input_message):
-        return input(input_message + "\n")
+        return input("\n" + input_message + "\n")
 
     def get_input(self, database_connector, input_message: str, options: Options):
         user_input = self.prompt_user(input_message)
@@ -133,6 +133,4 @@ class Validator():
                         user_input = self.prompt_user(input_message)
 
         return user_input
-
-# validator = Validator()
-# validator.get_input("", input_message="date", options={ "is_date": True })
+        
