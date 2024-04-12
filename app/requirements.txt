@@ -1,0 +1,4 @@
+colorama
+mysql-connector-python
+tabulate
+typing
