@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from colorama import Fore, Style
 
 class RecordManager():
 
@@ -33,7 +34,7 @@ class RecordManager():
     def is_row_changed(database_connector, records_changed_message, records_not_changed_message):
         rows_changed = database_connector.cursor.rowcount
         if rows_changed > 0:
-            print("\n" + records_changed_message)
+            print(Fore.GREEN + "\n" + records_changed_message)
 
         else:
-            print("\n" + records_not_changed_message)
+            print(Fore.RED + "\n" + records_not_changed_message)

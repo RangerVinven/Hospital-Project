@@ -1,4 +1,5 @@
 from typing import TypedDict, NotRequired
+from colorama import Fore, Style
 
 import re
 from datetime import date
@@ -31,7 +32,7 @@ class Validator():
         pass
 
     def prompt_user(self, input_message):
-        return input("\n" + input_message + "\n")
+        return input(Fore.MAGENTA + "\n" + input_message + "\n")
 
     def get_input(self, database_connector, input_message: str, options: Options):
         user_input = self.prompt_user(input_message)
@@ -44,13 +45,13 @@ class Validator():
         # Loops until the user enters something short enough
         elif "max_length" in options:
             while len(user_input) > options["max_length"]:
-                print("That's too long. The maximum length is {}".format(options["max_length"]))
+                print(Fore.RED + "That's too long. The maximum length is {}".format(options["max_length"]))
                 user_input = self.prompt_user(input_message)
 
         # Loops until the user enters something long enough
         if "min_length" in options:
             while len(user_input) < options["min_length"]:
-                print("That's too short. The minimum length is {}".format(options["min_length"]))
+                print(Fore.RED + "That's too short. The minimum length is {}".format(options["min_length"]))
                 user_input = self.prompt_user(input_message)
 
         # Ensures the input is an integer
@@ -65,7 +66,7 @@ class Validator():
                         incorrect_data_type = False
 
                     except ValueError:
-                        print("Input type must be an integer (whole number).")
+                        print(Fore.RED + "Input type must be an integer (whole number).")
                         user_input = self.prompt_user(input_message)
 
         # Ensures the item exists in the database (i.e, used when entering foreign keys)
@@ -82,7 +83,7 @@ class Validator():
 
             # Loops until the user enters something that exists in the table
             while len(results) == 0:
-                print("Couldn't find that in the {} table.".format(table))
+                print(Fore.RED + "Couldn't find that in the {} table.".format(table))
                 user_input = self.prompt_user(input_message)
                 
                 database_connector.cursor.execute(query, (user_input,))
@@ -101,7 +102,7 @@ class Validator():
 
             # Loops until the user enters something that exists in the table
             while len(results) != 0:
-                print("That already exists in the {} table. It must be unique.".format(table))
+                print(Fore.RED + "That already exists in the {} table. It must be unique.".format(table))
                 user_input = self.prompt_user(input_message)
                 
                 database_connector.cursor.execute(query, (user_input,))
@@ -114,7 +115,7 @@ class Validator():
 
             # While the regex pattern isn't found in the input
             while not re.search(regex, user_input):
-                print("Invalid format. The correct format is {}.".format(correct_format))
+                print(Fore.RED + "Invalid format. The correct format is {}.".format(correct_format))
                 user_input = self.prompt_user(input_message)
 
         
@@ -129,8 +130,10 @@ class Validator():
                         incorrect_format = False
                     
                     except ValueError:
-                        print("Invalid date. Must be a valid date in the YYYY-MM-DD format")
+                        print(Fore.RED + "Invalid date. Must be a valid date in the YYYY-MM-DD format")
                         user_input = self.prompt_user(input_message)
 
+        # Resets the terminal colour
+        print(Style.RESET_ALL)
         return user_input
         

@@ -4,8 +4,11 @@ from menu.prescription_menu import show_prescription_menu
 from menu.insurance_menu import show_insurance_menu
 from menu.doctor_menu import show_doctor_menu
 from menu.patient_menu import show_patient_menu
+from colorama import Fore, Style
 
 def show_menu():
+
+    print(Style.RESET_ALL)
 
     while True:
         main_menu = '''
@@ -17,14 +20,14 @@ def show_menu():
     6. Insurance
     99. Exit
     '''
-        print(main_menu)
+        print(Fore.BLUE + main_menu)
         
         # Gets the selected option
         selected_option = input("Enter which category you'd like to interact with: ")
 
         while selected_option not in ["1", "2", "3", "4", "5", "6", "99"]:
-            print("Invalid option")
-            selected_option = input("Enter which category you'd like to interact with: ")
+            print(Fore.RED + "Invalid option")
+            selected_option = input(Fore.BLUE + "Enter which category you'd like to interact with: ")
 
         # Shows the appropreate menu
         if selected_option == "1":
@@ -46,6 +49,7 @@ def show_menu():
             show_insurance_menu()
 
         else:
+            print(Style.RESET_ALL)
             break
 
 
