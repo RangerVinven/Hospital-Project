@@ -6,9 +6,6 @@ WORKDIR /app
 # Copies the code into /app
 COPY . /app
 
-# RUN chmod +x /app/wait-for-database.sh
-# RUN apk add mysql mysql-client
-
 # Installs the dependencies 
 RUN pip install --no-cache-dir -r requirements.txt
 
