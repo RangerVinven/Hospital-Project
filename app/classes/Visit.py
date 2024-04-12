@@ -1,6 +1,6 @@
 from utils.query_builder import QueryBuilder
 from utils.record_manager import RecordManager
-from utils.validator import Validator, TableAndColumn, ColumnOptionMapper
+from utils.validator import Validator, TableAndColumn 
 
 class Visit():
     def __init__(self):
