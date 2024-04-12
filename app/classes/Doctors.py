@@ -48,7 +48,7 @@ class Doctor():
         address = self.validator.get_input(database_connector, "Please enter the address you wish to search for (leave blank if unknown): ", self.column_options["address"])
         email = self.validator.get_input(database_connector, "Please enter the email you wish to search for (leave blank if unknown): ", self.column_options["email"])
         specialization = self.validator.get_input(database_connector, "Please enter the specialization you wish to search for (leave blank if unknown): ", self.column_options["specialization"])
-        experience = self.validator.get_input(database_connector, "Please enter the experience you wish to search for (leave blank if unknown): ", self.column_options["experience"])
+        experience = self.validator.get_input(database_connector, "Please enter the experience you wish to search for (leave blank if unknown): ", { **self.column_options["experience"], **{"can_be_blank": True} })
 
         query, variables = QueryBuilder.create_find_query("Doctor", ("doctorID", "firstname", "surname", "address", "email", "specialization", "experience"), (id, firstname, surname, address, email, specialization, experience))
 
