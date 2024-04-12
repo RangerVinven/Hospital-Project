@@ -1,6 +1,6 @@
 from classes.Insurance import Insurance
 from utils.database_connector import database_connector
-from colorama import Fore, Style
+from colorama import Fore
 
 def show_insurance_menu():
     menu = '''

@@ -1,7 +1,7 @@
 from classes.Drug import Drug
 from utils.database_connector import database_connector
 
-from colorama import Fore, Style
+from colorama import Fore
 
 def show_drug_menu():
     menu = '''
