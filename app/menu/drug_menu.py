@@ -1,6 +1,8 @@
 from classes.Drug import Drug
 from utils.database_connector import database_connector
 
+from colorama import Fore, Style
+
 def show_drug_menu():
     menu = '''
 1. Create drug
@@ -15,12 +17,12 @@ def show_drug_menu():
     drug = Drug()
 
     while True:
-        print(menu)
+        print(Fore.YELLOW + menu)
         selected_option = input("Enter your option: ")
 
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
-            print("Invalid choice")
-            selected_option = input("Enter your option: ")
+            print(Fore.RED + "Invalid choice")
+            selected_option = input(Fore.Yellow + "Enter your option: ")
 
         # Lists all the drugs
         if selected_option == "1":

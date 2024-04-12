@@ -1,4 +1,5 @@
 from classes.Doctors import Doctor, Specialist
+from colorama import Fore, Style
 
 from utils.database_connector import database_connector
 
@@ -15,20 +16,20 @@ def show_doctor_menu():
     doctor = Doctor()
 
     while True:
-        print(menu)
+        print(Fore.CYAN + menu)
         selected_option = input("Enter your option: ")
-
+        
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
-            print("Invalid choice")
-            selected_option = input("Enter your option: ")
+            print(Fore.RED + "Invalid choice")
+            selected_option = input(Fore.CYAN + "Enter your option: ")
 
         # Calls the relevant method
         if selected_option == "1":
             # Gets whether the doctor is a specialist
-            is_specialist = input("Is the doctor a specialist (yes/no)? ").lower()
+            is_specialist = input(Fore.MAGENTA + "Is the doctor a specialist (yes/no)? ").lower()
             while is_specialist not in ["y", "n", "yes", "no"]:
-                print("Invalid option")
-                is_specialist = input("Is the doctor a specialist (yes/no)? ").lower()
+                print(Fore.RED + "Invalid option")
+                is_specialist = input(Fore.MAGENTA + "Is the doctor a specialist (yes/no)? ").lower()
 
             # Creates a Specialist
             if is_specialist == "y" or is_specialist == "yes":

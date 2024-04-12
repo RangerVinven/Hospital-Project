@@ -2,6 +2,7 @@ from classes.Patients import Patient
 from classes.Patients import InsuredPatient
 
 from utils.database_connector import database_connector
+from colorama import Fore
 
 def show_patient_menu():
     menu = '''
@@ -16,12 +17,12 @@ def show_patient_menu():
     patient = Patient()
 
     while True:
-        print(menu)
+        print(Fore.YELLOW + menu)
         selected_option = input("Enter your option: ")
 
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
-            print("Invalid choice")
-            selected_option = input("Enter your option: ")
+            print(Fore.RED + "Invalid choice")
+            selected_option = input(Fore.YELLOW + "Enter your option: ")
 
         # Calls the relevant method
         if selected_option == "1":

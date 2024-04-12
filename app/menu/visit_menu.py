@@ -1,3 +1,5 @@
+from colorama import Fore
+
 from classes.Visit import Visit
 from utils.database_connector import database_connector
 
@@ -14,12 +16,12 @@ def show_visit_menu():
     visit = Visit()
 
     while True:
-        print(menu)
+        print(Fore.YELLOW + menu)
         selected_option = input("Enter your option: ")
 
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
-            print("Invalid choice")
-            selected_option = input("Enter your option: ")
+            print(Fore.RED + "Invalid choice")
+            selected_option = input(Fore.YELLOW + "Enter your option: ")
 
         # Creates a visit
         if selected_option == "1":

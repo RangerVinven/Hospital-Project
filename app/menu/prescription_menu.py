@@ -1,3 +1,4 @@
+from colorama import Fore
 from classes.Prescription import Prescription
 from utils.database_connector import database_connector
 
@@ -14,12 +15,12 @@ def show_prescription_menu():
     prescription = Prescription()
 
     while True:
-        print(menu)
+        print(Fore.CYAN + menu)
         selected_option = input("Enter your option: ")
 
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
-            print("Invalid choice")
-            selected_option = input("Enter your option: ")
+            print(Fore.RED + "Invalid choice")
+            selected_option = input(Fore.CYAN + "Enter your option: ")
 
         # Creates a prescription
         if selected_option == "1":
