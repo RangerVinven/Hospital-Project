@@ -6,4 +6,7 @@ COPY ./CSVFiles /var/lib/mysql-files/CSVFiles
 
 COPY ./schema.sql /docker-entrypoint-initdb.d/
 
+EXPOSE 3000
+EXPOSE 3306
+
 CMD [ "mysqld" ]

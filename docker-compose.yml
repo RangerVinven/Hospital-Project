@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./app
+    depends_on:
+      - db
+
+  db:
+    build: ./database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3000:3306"
+    volumes:
+      - data_volume:/var/lib/mysql
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.2
+
+volumes:
+  data_volume:
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
