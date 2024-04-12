@@ -11,6 +11,8 @@ def show_insurance_menu():
 6. Back
 '''
 
+    insurance = Insurance()
+
     while True:
         print(menu)
         selected_option = input("Enter your option: ")
@@ -19,21 +21,21 @@ def show_insurance_menu():
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
-        # Lists all the insurances
+        # Creates the insurance
         if selected_option == "1":
-            Insurance(database_connector)
+            insurance.create_insurance(database_connector)
 
         elif selected_option == "2":
-            Insurance.list_insurance(database_connector)
+            insurance.list_insurance(database_connector)
 
         elif selected_option == "3":
-            Insurance.find_insurance(database_connector)
+            insurance.find_insurance(database_connector)
 
         elif selected_option == "4":
-            Insurance.update_insurance(database_connector)
+            insurance.update_insurance(database_connector)
 
         elif selected_option == "5":
-            Insurance.delete_insurance(database_connector)
+            insurance.delete_insurance(database_connector)
 
         else:
             break

@@ -36,8 +36,13 @@ class Validator():
     def get_input(self, database_connector, input_message: str, options: Options):
         user_input = self.prompt_user(input_message)
 
+        # Allows for a blank input
+        if "can_be_blank" in options:
+            if user_input == "":
+                return user_input
+
         # Loops until the user enters something short enough
-        if "max_length" in options:
+        elif "max_length" in options:
             while len(user_input) > options["max_length"]:
                 print("That's too long. The maximum length is {}".format(options["max_length"]))
                 user_input = self.prompt_user(input_message)

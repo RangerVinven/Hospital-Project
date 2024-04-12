@@ -11,6 +11,8 @@ def show_prescription_menu():
 6. Back
 '''
 
+    prescription = Prescription()
+
     while True:
         print(menu)
         selected_option = input("Enter your option: ")
@@ -19,18 +21,21 @@ def show_prescription_menu():
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
-        # Lists all the prescriptions
+        # Creates a prescription
         if selected_option == "1":
-            Prescription(database_connector)
+            prescription.create_prescription(database_connector)
 
         elif selected_option == "2":
-            Prescription.list_prescriptions(database_connector)
+            prescription.list_prescriptions(database_connector)
 
         elif selected_option == "3":
-            Prescription.update_prescription(database_connector)
+            prescription.find_prescription(database_connector)
 
         elif selected_option == "4":
-            Prescription.delete_prescription(database_connector)
+            prescription.update_prescription(database_connector)
+
+        elif selected_option == "5":
+            prescription.delete_prescription(database_connector)
 
         else:
             break

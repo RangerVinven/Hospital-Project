@@ -32,7 +32,7 @@ def show_doctor_menu():
 
             # Creates a Specialist
             if is_specialist == "y" or is_specialist == "yes":
-                specialist = Specialist(database_connector)
+                specialist = Specialist()
                 specialist.create_specialist(database_connector)
 
             # Creates a doctor

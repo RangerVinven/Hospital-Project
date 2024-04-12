@@ -13,6 +13,8 @@ def show_patient_menu():
 6. Back
 '''
 
+    patient = Patient()
+
     while True:
         print(menu)
         selected_option = input("Enter your option: ")
@@ -36,20 +38,19 @@ def show_patient_menu():
 
             # Creates a Patient
             else:
-                doctor = Patient(database_connector)
-                doctor.create_patient(database_connector)
+                patient.create_patient(database_connector)
 
         elif selected_option == "2":
-            Patient.list_patients(database_connector)
+            patient.list_patients(database_connector)
 
         elif selected_option == "3":
-            Patient.find_patient(database_connector)
+            patient.find_patient(database_connector)
 
         elif selected_option == "4":
-            Patient.update_patient(database_connector)
+            patient.update_patient(database_connector)
 
         elif selected_option == "5":
-            Patient.delete_patient(database_connector)
+            patient.delete_patient(database_connector)
 
         else:
             break

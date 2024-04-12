@@ -11,6 +11,8 @@ def show_visit_menu():
 6. Back
 '''
 
+    visit = Visit()
+
     while True:
         print(menu)
         selected_option = input("Enter your option: ")
@@ -19,18 +21,21 @@ def show_visit_menu():
             print("Invalid choice")
             selected_option = input("Enter your option: ")
 
-        # Lists all the visits
+        # Creates a visit
         if selected_option == "1":
-            Visit(database_connector)
+            visit.create_visit(database_connector)
 
         elif selected_option == "2":
-            Visit.list_visits(database_connector)
+            visit.list_visits(database_connector)
 
         elif selected_option == "3":
-            Visit.update_visit(database_connector)
+            visit.find_visit(database_connector)
 
         elif selected_option == "4":
-            Visit.delete_visit(database_connector)
+            visit.update_visit(database_connector)
+
+        elif selected_option == "5":
+            visit.delete_visit(database_connector)
 
         else:
             break
