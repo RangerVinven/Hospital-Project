@@ -1,6 +1,5 @@
 FROM mysql:8.3.0
 
-# Will change after development
 ENV MYSQL_ROOT_PASSWORD=root
 
 COPY ./CSVFiles /var/lib/mysql-files/CSVFiles
