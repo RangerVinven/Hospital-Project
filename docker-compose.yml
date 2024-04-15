@@ -2,24 +2,31 @@ version: '3.8'
 
 services:
   app:
+    image: app
     build: ./app
-    depends_on:
-      - db
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    # depends_on:
+    #   - db
+    networks:
+      my_network:
+        ipv4_address: 172.20.0.3
 
   db:
+    image: hospital
     build: ./database
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3000:3306"
-    volumes:
-      - data_volume:/var/lib/mysql
+      - "3306:3306"
+    # volumes:
+    #   - data_volume:/var/lib/mysql
     networks:
       my_network:
         ipv4_address: 172.20.0.2
 
-volumes:
-  data_volume:
+# volumes:
+#   data_volume:
 
 networks:
   my_network:
