@@ -15,9 +15,9 @@ CREATE TABLE Drug(drugID varchar(7) primary key, name varchar(50), sideeffects v
 # Inserts the data
 SET GLOBAL local_infile=1;
 
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Insurance.csv' INTO TABLE Insurance FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Patient.csv' INTO TABLE Patient FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Visit.csv' INTO TABLE Visit FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Doctor.csv' INTO TABLE Doctor FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Prescription.csv' INTO TABLE Prescription FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
-LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Drug.csv' INTO TABLE Drug FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Insurance.csv' INTO TABLE Insurance FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Patient.csv' INTO TABLE Patient FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Visit.csv' INTO TABLE Visit FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Doctor.csv' INTO TABLE Doctor FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Prescription.csv' INTO TABLE Prescription FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA INFILE '/var/lib/mysql-files/CSVFiles/Drug.csv' INTO TABLE Drug FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
