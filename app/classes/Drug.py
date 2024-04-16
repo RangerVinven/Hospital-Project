@@ -4,8 +4,11 @@ from utils.record_manager import RecordManager
 from utils.validator import Validator, TableAndColumn
 
 class Drug():
+
     def __init__(self):
-        self.validator = Validator()
+        self.validator = Validator()  # Used to validate any user inputs
+        
+        # Used for validating the user's input for the create and update method
         self.column_options = {
             "drug_id": { "max_length":  7, "exists_in_table": TableAndColumn(table_name="Drug", column_name="DrugID") },
             "name": { "max_length": 50 },
@@ -29,6 +32,7 @@ class Drug():
         database_connector.cursor.execute("SELECT * FROM Drug;")
         drugs = database_connector.cursor.fetchall()
 
+        # Displays the result of the query
         RecordManager.print_records(drugs)
     
     def find_drug(self, database_connector):
@@ -39,10 +43,11 @@ class Drug():
         side_effects = self.validator.get_input(database_connector, "Please enter the side effects of drug you wish to search for (leave blank if unknown): ", self.column_options["side_effects"])
         benefits = self.validator.get_input(database_connector, "Please enter the benefits effects of drug you wish to search for (leave blank if unknown): ", self.column_options["benefits"] )
 
-        # Gets the query to find the Drug(s)
+        # Gets and executes the query to find the Drug(s)
         query, variables = QueryBuilder.create_find_query("Drug", ("drugID", "name", "sideeffects", "benefits"), (id, name, side_effects, benefits))
-
         database_connector.cursor.execute(query, tuple(variables))        
+
+        # Displays the result of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     def update_drug(self, database_connector):
@@ -55,6 +60,8 @@ class Drug():
         query, variables = QueryBuilder.create_update_query("Drug", ["DrugID"], [id], ("name", "sideeffects", "benefits"), (name, side_effects, benefits))
 
         database_connector.cursor.execute(query, tuple(variables))
+
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Drug updated", "Nothing updated")
 
         database_connector.db.commit()
@@ -63,5 +70,8 @@ class Drug():
         id = self.validator.get_input(database_connector, "Please enter the ID of the drug you wish to delete: ", { "exists_in_table": TableAndColumn(table_name="Drug", column_name="drugID") })
         database_connector.cursor.execute("DELETE FROM Drug WHERE drugID=%s", (id,))
 
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Drug deleted", "Drug not found, no drugs deleted")
+
+        # Saves the changes to the table
         database_connector.db.commit()

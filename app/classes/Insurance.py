@@ -5,7 +5,9 @@ from utils.validator import Validator, TableAndColumn, RegexFormatMapper
 
 class Insurance():
     def __init__(self):
-        self.validator = Validator() 
+        self.validator = Validator()   # Used to validate any user inputs
+        
+        # Used for validating the user's input for the create and update method
         self.column_options = {
             "insurance_id": { "max_length": 7, "exists_in_table": TableAndColumn(table_name="Insurance", column_name="InsuranceID") },
             "company": { "max_length": 45 },
@@ -27,6 +29,8 @@ class Insurance():
     # Returns all the insurance companies
     def list_insurance(self, database_connector):
         database_connector.cursor.execute("SELECT * FROM Insurance;")
+
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     # Returns a specific insurance company details
@@ -41,6 +45,8 @@ class Insurance():
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))        
+        
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
     
     def update_insurance(self, database_connector):
@@ -56,6 +62,7 @@ class Insurance():
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))
 
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Insurance updated", "No insurance found, nothing was updated")
         database_connector.db.commit()
    
@@ -64,5 +71,6 @@ class Insurance():
         insurance_id = self.validator.get_input(database_connector, "Please enter the id of the insurance you wish to delete: ", self.column_options["insurance_id"])
         database_connector.cursor.execute("DELETE FROM Insurance WHERE insuranceID=%s", (insurance_id,))
         
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Insurance deleted", "No insurance found, nothing was deleted")
         database_connector.db.commit()

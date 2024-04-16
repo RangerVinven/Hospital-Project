@@ -5,7 +5,9 @@ from utils.validator import Validator, RegexFormatMapper, TableAndColumn
 
 class Patient():
     def __init__(self):
-        self.validator = Validator()
+        self.validator = Validator()  # Used to validate any user inputs
+        
+        # Used for validating the user's input for the create and update method
         self.column_options = {
             "patient_id": { "max_length":  8, "exists_in_table": TableAndColumn(table_name="Patient", column_name="PatientID") },
             "firstname": { "max_length": 20 },
@@ -37,12 +39,15 @@ class Patient():
 
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email) VALUES (%s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email))
         
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Patient created", "Something went wrong, no patient created")
         database_connector.db.commit()
 
     # Returns all the patient companies
     def list_patients(self, database_connector):
         database_connector.cursor.execute("SELECT * FROM Patient;")
+        
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     # Returns a specific patient company details
@@ -63,6 +68,8 @@ class Patient():
 
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))        
+        
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
     
     def update_patient(self, database_connector):
@@ -84,6 +91,7 @@ class Patient():
         # Executes the query
         database_connector.cursor.execute(query, tuple(variables))
 
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Patient updated", "No patient found, nothing was updated")
         database_connector.db.commit()
    
@@ -92,6 +100,7 @@ class Patient():
         patient_id = self.validator.get_input(database_connector, "Please enter the id of the patient you wish to delete: ", self.column_options["patient_id"])
         database_connector.cursor.execute("DELETE FROM Patient WHERE patientID=%s", (patient_id,))
         
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Patient deleted", "No patient found, nothing was deleted")
         database_connector.db.commit()
 
@@ -100,13 +109,16 @@ class InsuredPatient(Patient):
     def __init__(self, database_connector):
         super().__init__()
     
+        # Gets the user inputs for creating the insured user
         self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email = self.get_create_inputs(database_connector)
         self.insurance_id = self.validator.get_input(database_connector, "What is the patient's insurance's ID? ", self.column_options["insurance_id"] )
         self.insurance_type = self.validator.get_input(database_connector, "What is the patient's insurance type? ", self.column_options["insurance_type"])
         self.insurance_duration = self.validator.get_input(database_connector, "What is the patient's insurance duration in years? ", self.column_options["insurance_duration"])
 
+    # Creates an insured user
     def create_insured_patient(self, database_connector):
         database_connector.cursor.execute("INSERT INTO Patient(patientID, firstname, surname, postcode, address, phone, email, insuranceID, insuranceType, insuranceDuration) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", (self.patient_id, self.firstname, self.surname, self.postcode, self.address, self.phone, self.email, self.insurance_id, self.insurance_type, self.insurance_duration))
 
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Patient created", "Something went wrong, no patient created")
         database_connector.db.commit()

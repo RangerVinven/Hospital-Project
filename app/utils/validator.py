@@ -4,14 +4,18 @@ from colorama import Fore, Style
 import re
 from datetime import date
 
+# Maps a column and a table
+# For the exists_in_table option
 class TableAndColumn(TypedDict):
     table_name: str
     column_name: str
 
+# Used for the regex option
 class RegexFormatMapper(TypedDict):
     regex: str
     correct_format: str
 
+# Used to define the different options/validation a user's inputs may have
 class Options(TypedDict):
     max_length: NotRequired[int]
     min_length: NotRequired[int]
@@ -31,9 +35,11 @@ class Validator():
     def __init__(self):
         pass
 
+    # Asks the user for an input
     def prompt_user(self, input_message):
         return input(Fore.MAGENTA + "\n" + input_message + "\n")
 
+    # Gets a user's input and checks it against the options/validations
     def get_input(self, database_connector, input_message: str, options: Options):
         user_input = self.prompt_user(input_message)
 
@@ -65,7 +71,7 @@ class Validator():
                         int(user_input)  # Throws exception if the input isn't an integer
                         incorrect_data_type = False
 
-                    except ValueError:
+                    except ValueError:  # Caught if the input isn't an int
                         print(Fore.RED + "Input type must be an integer (whole number).")
                         user_input = self.prompt_user(input_message)
 
@@ -86,9 +92,11 @@ class Validator():
                 print(Fore.RED + "Couldn't find that in the {} table.".format(table))
                 user_input = self.prompt_user(input_message)
                 
+                # Executes a query
                 database_connector.cursor.execute(query, (user_input,))
                 results = database_connector.cursor.fetchall()
 
+        # Checks if the user input is unique
         if "unique" in options:
             table = options["unique"]["table_name"]
             column = options["unique"]["column_name"]
@@ -118,7 +126,7 @@ class Validator():
                 print(Fore.RED + "Invalid format. The correct format is {}.".format(correct_format))
                 user_input = self.prompt_user(input_message)
 
-        
+        # Checks if the user input is in YYYY-MM-DD format
         if "is_date" in options:
             if options["is_date"]:
                 incorrect_format = True
@@ -126,7 +134,7 @@ class Validator():
                 # Loops until the user enters a correct date
                 while incorrect_format:
                     try:
-                        date.fromisoformat(user_input)
+                        date.fromisoformat(user_input)  # Throws an exception if the date isn't in YYYY-MM-DD
                         incorrect_format = False
                     
                     except ValueError:

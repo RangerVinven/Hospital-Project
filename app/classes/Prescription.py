@@ -5,7 +5,9 @@ from utils.validator import Validator, TableAndColumn
 
 class Prescription():
     def __init__(self):
-        self.validator = Validator()
+        self.validator = Validator()  # Used to validate any user inputs
+        
+        # Used for validating the user's input for the create and update method
         self.column_options = { 
             "prescription_id": { "max_length": 10, "exists_in_table": TableAndColumn(table_name="Prescription", column_name="PrescriptionID") },
             "date_of_prescription": { "is_date": True },
@@ -34,6 +36,8 @@ class Prescription():
 
     def list_prescriptions(self, database_connector):
         database_connector.cursor.execute("SELECT * FROM Prescription;")
+        
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     def find_prescription(self, database_connector):
@@ -47,9 +51,11 @@ class Prescription():
         patient_id = self.validator.get_input(database_connector, "Please enter the patient's id (or leave blank): ", { **self.column_options["patient_id"], **{"can_be_blank": True} })
         doctor_id = self.validator.get_input(database_connector, "Please enter the doctor's id (or leave blank): ", { **self.column_options["doctor_id"], **{"can_be_blank": True} })
 
+        # Creates and executes the find query
         query, variables = QueryBuilder.create_find_query("Prescription", ("prescriptionID", "dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (prescription_id, date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
-
         database_connector.cursor.execute(query, variables)
+        
+        # Displays the results of the query
         RecordManager.print_records(database_connector.cursor.fetchall())
 
     # Updates the prescription
@@ -63,18 +69,24 @@ class Prescription():
         patient_id = self.validator.get_input(database_connector, "Please enter the patient's id: ", { **self.column_options["patient_id"], **{"can_be_blank": True} })
         doctor_id = self.validator.get_input(database_connector, "Please enter the doctor's id : ", { **self.column_options["doctor_id"], **{"can_be_blank": True} })
 
+        # Creates and executes the update query
         query, variables = QueryBuilder.create_update_query("Prescription", ["prescriptionID"], [prescription_id], ("dateprescribed", "dosage", "duration", "comment", "drugID", "patientID", "doctorID"), (date_of_prescription, dosage, duration, comment, drug_id, patient_id, doctor_id))
-        
         database_connector.cursor.execute(query, tuple(variables))
+        
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Prescription updated", "Prescription not found, no prescription updated")
 
+        # Saves the changes made to the table
         database_connector.db.commit()
 
+    # Delets a prescription
     def delete_prescription(self, database_connector):
         prescription_id = self.validator.get_input(database_connector, "Please enter the ID of the prescription you wish to delete: ", self.column_options["prescription_id"])
-
         database_connector.cursor.execute("DELETE FROM Prescription WHERE prescriptionID=%s;", (prescription_id,))
+        
+        # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Prescription deleted", "Prescription not found, no prescription deleted")
 
+        # Saves the changes made to the table
         database_connector.db.commit()
 

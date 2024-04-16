@@ -33,6 +33,7 @@ class DatabaseConnector():
                 print(Fore.RED + "Could not connect to the database. If this persists, contact IT. Retrying in 3 seconds..." + Style.RESET_ALL)
                 sleep(3) 
 
+    # Closes the connection
     def close_connection(self):
         self.cursor.close()
         self.db.close()

@@ -3,6 +3,7 @@ from colorama import Fore, Style
 
 from utils.database_connector import database_connector
 
+# Shows the menu
 def show_doctor_menu():
     menu = '''
 1. Create doctor
@@ -17,13 +18,16 @@ def show_doctor_menu():
 
     while True:
         print(Fore.CYAN + menu)
+
+        # Gets the user's selected option
         selected_option = input("Enter your option: ")
         
+        # Loops until the user enters a valid option
         while selected_option not in ["1", "2", "3", "4", "5", "6"]:
             print(Fore.RED + "Invalid choice")
             selected_option = input(Fore.CYAN + "Enter your option: ")
 
-        # Calls the relevant method
+        # Creates doctor
         if selected_option == "1":
             # Gets whether the doctor is a specialist
             is_specialist = input(Fore.MAGENTA + "Is the doctor a specialist (yes/no)? ").lower()
@@ -40,17 +44,22 @@ def show_doctor_menu():
             else:
                 doctor.create_doctor(database_connector)
 
+        # List doctors
         elif selected_option == "2":
             doctor.list_doctors(database_connector)
 
+        # Find doctor
         elif selected_option == "3":
             doctor.find_doctor(database_connector)
 
+        # Update doctor
         elif selected_option == "4":
             doctor.update_doctor(database_connector)
 
+        # Delete doctor
         elif selected_option == "5":
             doctor.delete_doctor(database_connector)
 
+        # Exit
         else:
             break
