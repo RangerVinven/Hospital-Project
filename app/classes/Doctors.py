@@ -102,7 +102,7 @@ class Doctor():
         # Displays the second argument if the table was changed, the third argument if not
         RecordManager.is_row_changed(database_connector, "Doctor deleted", "No doctor found, nothing was deleted")
         
-        # Saves teh changes to the table
+        # Saves the changes to the table
         database_connector.db.commit()
 
 # Specialist class, subclass of Doctor
